@@ -1,0 +1,15 @@
+{* This is the welcome page, you can delete it *}
+
+{block content}
+	<h1 n:block="title">Můj blog</h1>
+
+	{foreach $posts as $post}
+	<div class="post">
+		<div class="date">{$post->datumVydani|date:'F j, Y'}</div>
+
+		<h2>{$post->nazev}</h2>
+
+		<div>{$post->popis|truncate:256}</div>
+	</div>
+	{/foreach}
+{/block}
