@@ -7,7 +7,7 @@ namespace App\Presenters;
 use Nette;
 
 
-final class HomepagePresenter extends Nette\Application\UI\Presenter
+final class KnihaPresenter extends Nette\Application\UI\Presenter
 {
     
     private Nette\Database\Explorer $database;
@@ -17,12 +17,14 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
 		$this->database = $database;
 	}
 
-	public function renderDefault(): void
+	public function renderShow(int $id): void
 	{
-		$this->template->knihy = $this->database
+		$kniha = $this->database
 			->table('kniha')
-			->order('datumVydani DESC')
-			->limit(5);
-
+			->get($id);
+		if (!$kniha) {
+			$this->error('Stránka nebyla nalezena');
+		}
+		$this->template->kniha = $kniha;
 	}
 }

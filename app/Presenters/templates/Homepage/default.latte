@@ -3,13 +3,14 @@
 {block content}
 	<h1 n:block="title">Můj blog</h1>
 
-	{foreach $posts as $post}
-	<div class="post">
-		<div class="date">{$post->datumVydani|date:'F j, Y'}</div>
+	{foreach $knihy as $kniha}
+	<div class="kniha">
+		<h2><a href="{link Kniha:show $kniha->ID}">{$kniha->nazev}</a></h2>
+		<div class="date">{$kniha->datumVydani|date:'F j, Y'}</div>
 
-		<h2>{$post->nazev}</h2>
+		<h2>{$kniha->nazev}</h2>
 
-		<div>{$post->popis|truncate:256}</div>
+		<div>{$kniha->popis|truncate:256}</div>
 	</div>
 	{/foreach}
 {/block}
