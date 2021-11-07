@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Presenters;
+namespace App\AutetificationModule\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
 use Tracy\Debugger;
-
 Debugger::enable();
 
 final class SignInPresenter extends Nette\Application\UI\Presenter

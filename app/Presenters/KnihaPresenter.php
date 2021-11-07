@@ -19,9 +19,8 @@ final class KnihaPresenter extends Nette\Application\UI\Presenter
 
 	public function renderShow(int $id): void
 	{
-		$kniha = $this->database
-			->table('kniha')
-			->get($id);
+		$kniha = $this->database->table('kniha')->get($id);
+		
 		if (!$kniha) {
 			$this->error('Stránka nebyla nalezena');
 		}
