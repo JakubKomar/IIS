@@ -6,21 +6,26 @@ namespace App\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
+use Tracy\Debugger;
 
+Debugger::enable();
 
 final class SignInPresenter extends Nette\Application\UI\Presenter
 {
 	/**
 	 * Sign-in form factory.
 	 */
+
+	public function renderShow( ): void
+	{
+	}
+
 	protected function createComponentSignInForm(): Form
 	{
 		$form = new Form;
-		$form->addText('username', 'Login:')
-			->setRequired('Zadejte login, prosím.');
+		$form->addText('username', 'Login:')->setRequired('Zadejte login, prosím.');
 
-		$form->addPassword('password', 'Heslo:')
-			->setRequired('Zadejte heslo, prosím.');
+		$form->addPassword('password', 'Heslo:')->setRequired('Zadejte heslo, prosím.');
 
 		$form->addSubmit('send', 'Přihlásit');
 
@@ -32,11 +37,13 @@ final class SignInPresenter extends Nette\Application\UI\Presenter
 
 	public function signInFormSucceeded(Form $form, \stdClass $values): void
 	{
-		try {
+		try 
+		{
 			$this->getUser()->login($values->username, $values->password);
 			$this->redirect('Homepage:');
 
-		} catch (Nette\Security\AuthenticationException $e) {
+		} catch (Nette\Security\AuthenticationException $e) 
+		{
 			$form->addError('Incorrect username or password.');
 		}
 	}

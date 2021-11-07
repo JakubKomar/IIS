@@ -3,6 +3,7 @@
 {block content}
 	<h1 n:block="title">Homepage</h1>
 	<a href="{link Vyhledani:show null}">Vyhledavani</a>
+	<a href="{link SignIn:show}">Přihlášení</a>
 	{foreach $knihy as $kniha}
 	<div class="kniha">
 		<h2><a href="{link Kniha:show $kniha->ID}">{$kniha->nazev}</a></h2>
