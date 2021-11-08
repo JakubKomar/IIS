@@ -1,5 +1,5 @@
 <?php
-namespace App\Model;
+namespace App\LoginModule\Model;
 use Nette\Security\IAuthorizator;
 use Nette\Security\Permission;
 
@@ -14,7 +14,8 @@ class AuthorizatorFactory
         $acl->addRole('distributor', 'guest'); 
 		$acl->addRole('admin', ['knihovnik','distributor',]); 
 
-
+		$acl->addResource('Vyhledani');
+		$acl->allow('registered', 'Vyhledani');
 		return $acl;
 	}
 }

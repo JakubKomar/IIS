@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Presenters;
+namespace App\CoreModule\Presenters;
 
 use Nette;
 
 
-final class HomepagePresenter extends Nette\Application\UI\Presenter
+final class HomepagePresenter extends  \App\CoreModule\Presenters\BasePresenter
 {
     
     private Nette\Database\Explorer $database;

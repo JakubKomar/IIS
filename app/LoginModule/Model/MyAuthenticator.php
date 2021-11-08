@@ -1,5 +1,5 @@
 <?php
-namespace App\Model;
+namespace App\LoginModule\Model;
 
 use Nette;
 use Nette\Security\SimpleIdentity;

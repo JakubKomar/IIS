@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Presenters;
+namespace App\LoginModule\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
-use App\Model\MyAuthenticator;
-use App\Model\DuplicateNameException;
-use Tracy\Debugger;
-Debugger::enable();
+use App\LoginModule\Model\MyAuthenticator;
+use App\LoginModule\Model\DuplicateNameException;
 
-final class SignUpPresenter extends Nette\Application\UI\Presenter
+final class SignUpPresenter extends \App\CoreModule\Presenters\BasePresenter
 {
 	private MyAuthenticator $MyAuthenticator;
 
@@ -20,7 +18,7 @@ final class SignUpPresenter extends Nette\Application\UI\Presenter
 		$this->MyAuthenticator = $MyAuthenticator;
 	}
 
-	public function renderShow( ): void
+	public function renderDefault( ): void
 	{
 	}
 
@@ -49,7 +47,7 @@ final class SignUpPresenter extends Nette\Application\UI\Presenter
 			try 
 			{
 				$this->MyAuthenticator->add($values->username, $values->password);
-				$this->redirect('Homepage:');
+				$this->redirect(':Core:Homepage:');
 
 			} catch (DuplicateNameException $e) 
 			{

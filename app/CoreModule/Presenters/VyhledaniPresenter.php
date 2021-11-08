@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Presenters;
+namespace App\CoreModule\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
 
-final class VyhledaniPresenter extends Nette\Application\UI\Presenter
+final class VyhledaniPresenter extends \App\CoreModule\Presenters\BasePresenter
 {
     
     private Nette\Database\Explorer $database;
@@ -16,12 +16,13 @@ final class VyhledaniPresenter extends Nette\Application\UI\Presenter
 		$this->database = $database;
 	}
 
-	public function renderShow( $values): void
+    public function renderDefault( $values): void
 	{
      
             $this->template->knihy=$values;
 
 	}
+
     protected function createComponentVyhledaniForm(): Form
     {
         $form = new Form; // means Nette\Application\UI\Form

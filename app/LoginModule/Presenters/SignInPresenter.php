@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Presenters;
+namespace App\LoginModule\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
 
-final class SignInPresenter extends Nette\Application\UI\Presenter
+final class SignInPresenter extends \App\CoreModule\Presenters\BasePresenter
 {
 
-	public function renderShow( ): void
+	public function renderDefault( ): void
 	{
 	}
 
@@ -34,7 +34,7 @@ final class SignInPresenter extends Nette\Application\UI\Presenter
 		{
 			$this->getUser()->login($values->username, $values->password);
 			$this->getUser()->setExpiration('30 minutes');
-			$this->redirect('Homepage:');
+			$this->presenter->redirect(':Core:Homepage:');
 
 		} catch (Nette\Security\AuthenticationException $e) 
 		{

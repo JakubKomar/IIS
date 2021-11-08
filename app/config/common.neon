@@ -19,5 +19,5 @@ di:
 
 services:
 	- App\Router\RouterFactory::createRouter
-	- App\Model\MyAuthenticator
-	- App\Model\AuthorizatorFactory::create
+	- App\LoginModule\Model\MyAuthenticator
+	- App\LoginModule\Model\AuthorizatorFactory::create
