@@ -23,7 +23,6 @@ final class SignInPresenter extends Nette\Application\UI\Presenter
 
 		$form->addSubmit('send', 'Přihlásit');
 
-		// call method signInFormSucceeded() on success
 		$form->onSuccess[] = [$this, 'signInFormSucceeded'];
 		return $form;
 	}
@@ -34,6 +33,7 @@ final class SignInPresenter extends Nette\Application\UI\Presenter
 		try 
 		{
 			$this->getUser()->login($values->username, $values->password);
+			$this->getUser()->setExpiration('30 minutes');
 			$this->redirect('Homepage:');
 
 		} catch (Nette\Security\AuthenticationException $e) 

@@ -20,3 +20,4 @@ di:
 services:
 	- App\Router\RouterFactory::createRouter
 	- App\Model\MyAuthenticator
+	- App\Model\AuthorizatorFactory::create

@@ -26,18 +26,18 @@ class MyAuthenticator implements Nette\Security\Authenticator
 			throw new Nette\Security\AuthenticationException('User not found.');
 		}
 
-		if (!$password== $row->password) //hash function to do
+		if ( !$this->passwords->verify($password, $row->password)) 
 		{
 			throw new Nette\Security\AuthenticationException('Invalid password.');
 		}
 
-		return new SimpleIdentity( $row->username);
+		return new SimpleIdentity( $row->username,$row->role);
 	}
-	public function add(string $username, string $password): void
+	public function add(string $username, string $password,string $role='registered'): void
 	{
 		try 
 		{
-			$this->database->table('users')->insert(['username' => $username,'password' => $password,]);
+			$this->database->table('users')->insert(['username' => $username,'password' => $this->passwords->hash($password),'role' => $role]);
 		} 
 		catch (Nette\Database\UniqueConstraintViolationException $e) {
 			throw new DuplicateNameException;

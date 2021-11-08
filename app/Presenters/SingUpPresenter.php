@@ -34,7 +34,7 @@ final class SignUpPresenter extends Nette\Application\UI\Presenter
 
 		$form->addSubmit('send', 'Registrovat');
 
-		// call method signInFormSucceeded() on success
+
 		$form->onSuccess[] = [$this, 'signUpFormSucceeded'];
 		return $form;
 	}
@@ -49,7 +49,7 @@ final class SignUpPresenter extends Nette\Application\UI\Presenter
 			try 
 			{
 				$this->MyAuthenticator->add($values->username, $values->password);
-				//$this->redirect('Homepage:');
+				$this->redirect('Homepage:');
 
 			} catch (DuplicateNameException $e) 
 			{
