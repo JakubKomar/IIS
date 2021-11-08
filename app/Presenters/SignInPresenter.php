@@ -2,18 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\AutetificationModule\Presenters;
+namespace App\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
-use Tracy\Debugger;
-Debugger::enable();
 
 final class SignInPresenter extends Nette\Application\UI\Presenter
 {
-	/**
-	 * Sign-in form factory.
-	 */
 
 	public function renderShow( ): void
 	{

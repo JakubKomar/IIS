@@ -6,6 +6,7 @@ use Nette\Security\SimpleIdentity;
 
 class MyAuthenticator implements Nette\Security\Authenticator
 {
+	use Nette\SmartObject;
 	private $database;
 	private $passwords;
 
@@ -30,6 +31,19 @@ class MyAuthenticator implements Nette\Security\Authenticator
 			throw new Nette\Security\AuthenticationException('Invalid password.');
 		}
 
-		return new SimpleIdentity($row->id, ['name' => $row->username]);
+		return new SimpleIdentity( $row->username);
 	}
+	public function add(string $username, string $password): void
+	{
+		try 
+		{
+			$this->database->table('users')->insert(['username' => $username,'password' => $password,]);
+		} 
+		catch (Nette\Database\UniqueConstraintViolationException $e) {
+			throw new DuplicateNameException;
+		}
+	}
+}
+class DuplicateNameException extends \Exception
+{
 }
