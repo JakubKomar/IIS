@@ -16,6 +16,9 @@ class AuthorizatorFactory
 
 		$acl->addResource('Vyhledani');
 		$acl->allow('registered', 'Vyhledani');
+
+		$acl->addResource('AdminPage');
+		$acl->allow('admin', 'AdminPage');
 		return $acl;
 	}
 }
