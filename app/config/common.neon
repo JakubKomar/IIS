@@ -20,4 +20,5 @@ di:
 services:
 	- App\Router\RouterFactory::createRouter
 	- App\LoginModule\Model\MyAuthenticator
+	- App\BookModule\Model\BookFinder
 	- App\LoginModule\Model\AuthorizatorFactory::create

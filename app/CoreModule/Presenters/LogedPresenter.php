@@ -15,7 +15,11 @@ abstract class LogedPresenter extends \App\CoreModule\Presenters\BasePresenter
             {
 				$this->flashMessage('Z důvodu neaktivity jste byl odhlášen.');
 			}
-			$this->redirect(':Login:signIn:');
+            else
+            {
+                $this->flashMessage('K přístupu do této sekce musíte být přihlášen.');
+            }
+			$this->redirect(':Login:SignIn:');
 		}
 		parent::startup();		
 	}

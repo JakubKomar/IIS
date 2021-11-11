@@ -9,19 +9,11 @@ use Nette;
 
 final class HomepagePresenter extends  \App\CoreModule\Presenters\BasePresenter
 {
-    
-    private Nette\Database\Explorer $database;
-
-	public function __construct(Nette\Database\Explorer $database)
+	public function __construct()
 	{
-		$this->database = $database;
 	}
 	public function renderDefault(): void
 	{
-		$this->template->knihy = $this->database
-			->table('kniha')
-			->order('datumVydani DESC')
-			->limit(5);
 
 	}
 }

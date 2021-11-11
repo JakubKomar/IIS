@@ -1,11 +1,3 @@
-{* This is the welcome page, you can delete it *}
-
 {block content}
-	{foreach $knihy as $kniha}
-	<div class="kniha">
-		<h2><a href="{link Kniha:show $kniha->ID}">{$kniha->nazev}</a></h2>
-		<div class="date">{$kniha->datumVydani|date:'F j, Y'}</div>
-		<div>{$kniha->popis|truncate:256}</div>
-	</div>
-	{/foreach}
+	<h1>Vítejte v knihovně.</h1>
 {/block}
