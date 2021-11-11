@@ -6,7 +6,7 @@
         <li><a n:href=":Core:Vyhledani:">Vyhledávaní</a></li>
         <li><a n:href=":Login:SignIn:">Přihlášení</a></li>
         <li><a n:href=":Login:SignUp:">Registrace</a></li>
-        <li><a n:href=":Admin:UsersAdmin:">Správa uživatelů</a></li>
+        {if $user->isAllowed('AdminPage')}<li><a n:href=":Admin:UsersAdmin:">Správa uživatelů</a></li>{/if}
     </ul>
 </nav>
 </div>

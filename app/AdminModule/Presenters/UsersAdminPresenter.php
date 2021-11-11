@@ -7,24 +7,26 @@ namespace App\AdminModule\Presenters;
 use Nette;
 
 
-final class UsersAdminPresenter extends  \App\CoreModule\Presenters\BasePresenter
+final class UsersAdminPresenter extends  \App\CoreModule\Presenters\LogedPresenter
 {
-    
-	public function __construct()
-	{
-		
-	}
-	protected function startup()
+    protected function startup(): void
 	{
 		parent::startup();
 		if (!$this->getUser()->isAllowed('AdminPage')) 
 		{
-			$this->error('Forbidden', 403);
+			$this->error('Sem nemáte přístup!', 403);
 		}
 	}
+
+	public function __construct()
+	{
+		
+	}
+
 	public function renderDefault(): void
 	{
 		
 
 	}
+
 }

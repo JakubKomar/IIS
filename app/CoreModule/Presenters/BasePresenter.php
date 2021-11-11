@@ -4,9 +4,7 @@ namespace App\CoreModule\Presenters;
 
 use Nette;
 use App\Model;
-use Tracy\Debugger;
 
-Debugger::enable();
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
