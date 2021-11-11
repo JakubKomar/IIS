@@ -6,6 +6,7 @@
         <li><a n:href=":Book:Vyhledani:">Vyhledávaní</a></li>
         <li><a n:href=":Login:SignIn:">Přihlášení</a></li>
         <li><a n:href=":Login:SignUp:">Registrace</a></li>
+        {if $user->isLoggedIn()}<li><a n:href=":User:UserEdit:">Profil</a></li>{/if}
         {if $user->isAllowed('AdminPage')}<li><a n:href=":Admin:UsersAdmin:">Správa uživatelů</a></li>{/if}
     </ul>
 </nav>

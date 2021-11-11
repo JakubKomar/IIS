@@ -19,6 +19,11 @@ di:
 
 services:
 	- App\Router\RouterFactory::createRouter
+
 	- App\LoginModule\Model\MyAuthenticator
+
 	- App\BookModule\Model\BookFinder
+
+	- App\UserModule\Model\EditUser
+
 	- App\LoginModule\Model\AuthorizatorFactory::create

@@ -17,6 +17,7 @@ final class SignInPresenter extends \App\CoreModule\Presenters\BasePresenter
 	protected function createComponentSignInForm(): Form
 	{
 		$form = new Form;
+		$form->addProtection();
 		$form->addText('username', 'Login:')->setRequired('Zadejte login, prosím.');
 
 		$form->addPassword('password', 'Heslo:')->setRequired('Zadejte heslo, prosím.');
@@ -33,7 +34,7 @@ final class SignInPresenter extends \App\CoreModule\Presenters\BasePresenter
 		try 
 		{
 			$this->getUser()->login($values->username, $values->password);
-			$this->getUser()->setExpiration('1 minutes');
+			$this->getUser()->setExpiration('30 minutes');
 			$this->presenter->redirect(':Core:Homepage:');
 
 		} catch (Nette\Security\AuthenticationException $e) 

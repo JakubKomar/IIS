@@ -5,10 +5,6 @@
 		<div class="kniha">
 			<h2><a href="{link Kniha:show $kniha->ID}">{$kniha->nazev}</a></h2>
 			<div class="date">{$kniha->datumVydani|date:'F j, Y'}</div>
-
-			<h2>{$kniha->nazev}</h2>
-
-			<div>{$kniha->popis|truncate:256}</div>
 		</div>
 	{/foreach}
 	{/if}

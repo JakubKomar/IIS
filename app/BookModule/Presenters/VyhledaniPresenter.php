@@ -28,7 +28,6 @@ final class VyhledaniPresenter extends \App\CoreModule\Presenters\BasePresenter
        {
             $this->template->knihy=NULL;
        }
-
 	}
 
     protected function createComponentVyhledaniForm(): Form
