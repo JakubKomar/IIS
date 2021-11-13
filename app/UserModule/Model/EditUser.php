@@ -2,9 +2,7 @@
 namespace App\UserModule\Model;
 use Nette;
 use App\LoginModule\Model\MyAuthenticator;
-use Tracy\Debugger;
 
-Debugger::enable();
 final class  EditUser
 {
 	use Nette\SmartObject;
@@ -33,6 +31,11 @@ final class  EditUser
 			'ulice' => $values->ulice,
 			'psc' => $values->psc,
 		]);
+		if(isset($values->role))
+		{
+			$this->database->table('uzivatel')->get($username)->update([
+				'role' => $values->role,]);
+		}
 		if($values->password)	
 		{
 			$this->MyAuthenticator->chengePass($username,$values->password);			

@@ -1,3 +1,14 @@
 {block content}
-	<h1>Admin page</h1>
+	<h1>Správa uživatelů</h1>
+	<a href="{link UserAdmCreate: }">Vytvořit nového uživatele</a>
+	{if $users}
+		<ul>
+		{foreach $users as $uzivatel}
+			<div class="userItem">
+				<li><a href="{link UserAdmEdit: $uzivatel->ID}">{$uzivatel->ID}</a></li>
+			</div>
+		{/foreach}
+		</ul>
+	{/if}
+
 {/block}

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\AdminModule\Presenters;
 
+use App\AdminModule\Model\UserAdmPage;
 use Nette;
 
 
@@ -12,21 +13,20 @@ final class UsersAdminPresenter extends  \App\CoreModule\Presenters\LogedPresent
     protected function startup(): void
 	{
 		parent::startup();
-		if (!$this->getUser()->isAllowed('AdminPage')) 
-		{
-			$this->error('Sem nemáte přístup!', 403);
-		}
+		$this->resorceAutorize('AdminPage');
 	}
 
-	public function __construct()
+	private UserAdmPage $admContoler;
+
+	public function __construct(UserAdmPage $admContoler)
 	{
-		
+        $this->admContoler=$admContoler;
 	}
+
 
 	public function renderDefault(): void
 	{
-		
-
+		$this->template->users=$this->admContoler->getUsers();		
 	}
 
 }

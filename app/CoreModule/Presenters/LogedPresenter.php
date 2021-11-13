@@ -23,4 +23,12 @@ abstract class LogedPresenter extends \App\CoreModule\Presenters\BasePresenter
 		}
 		parent::startup();		
 	}
+    protected function resorceAutorize(string $resorce):void
+    {
+        if (!$this->getUser()->isAllowed($resorce)) 
+		{
+			$this->error('Sem nemáte přístup!', 403);
+		}
+    }
 }
+
