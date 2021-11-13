@@ -12,4 +12,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         return [__DIR__ ."/templates/@layout.latte",];
     }
+
+    public function handleLogout():void
+    {
+        $this->getUser()->logout(true);
+        $this->flashMessage('Odhlšení proběhlo úspěšně');
+        $this->redirect(':Core:Homepage:');
+    }
 }

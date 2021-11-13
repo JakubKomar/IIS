@@ -42,12 +42,4 @@ final class SignInPresenter extends \App\CoreModule\Presenters\BasePresenter
 			$form->addError('Incorrect username or password.');
 		}
 	}
-
-
-	public function actionOut(): void
-	{
-		$this->getUser()->logout();
-		$this->flashMessage('Odhlášení úspěšné.');
-		$this->redirect('Homepage:');
-	}
 }
