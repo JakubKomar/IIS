@@ -26,7 +26,7 @@ final class SignUpPresenter extends \App\CoreModule\Presenters\BasePresenter
 	{
 		$form = new Form;
 		$form->addProtection();
-		$form->addText('username', 'Login:')->setRequired('Zadejte login, prosím.');
+		$form->addText('username', 'Login:')->setRequired('Zadejte login, prosím.')->addRule($form::MAX_LENGTH, 'Uživatelské jméno je příliž dlouhé', 48);
 		$form->addPassword('password', 'Heslo:')->setRequired('Zadejte heslo, prosím.')->addRule($form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaků', 8);
 		$form->addPassword('passwordVerify', 'Heslo pro kontrolu:')
 			->setRequired('Zadejte prosím heslo ještě jednou pro kontrolu')
@@ -46,7 +46,9 @@ final class SignUpPresenter extends \App\CoreModule\Presenters\BasePresenter
 		try 
 		{
 			$this->MyAuthenticator->add($values->username, $values->password);
-			$this->redirect(':Core:Homepage:');
+			$this->getUser()->login($values->username, $values->password);
+			$this->getUser()->setExpiration('30 minutes');
+			$this->redirect(':User:UserEdit:');
 
 		} catch (DuplicateNameException $e) 
 		{

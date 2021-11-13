@@ -33,6 +33,7 @@ class MyAuthenticator implements Nette\Security\Authenticator
 
 		return new SimpleIdentity( $row->ID,$row->role);
 	}
+
 	public function add(string $username, string $password,string $role='registered'): void
 	{
 		try 
@@ -42,6 +43,11 @@ class MyAuthenticator implements Nette\Security\Authenticator
 		catch (Nette\Database\UniqueConstraintViolationException $e) {
 			throw new DuplicateNameException;
 		}
+	}
+
+	public function chengePass(string $username, string $password): void
+	{
+		$this->database->table('uzivatel')->get($username)->update(['heslo' => $this->passwords->hash($password)]);
 	}
 }
 class DuplicateNameException extends \Exception
