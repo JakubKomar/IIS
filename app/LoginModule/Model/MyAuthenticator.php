@@ -20,24 +20,24 @@ class MyAuthenticator implements Nette\Security\Authenticator
 	public function authenticate(string $username, string $password): SimpleIdentity
 	{
 
-		$row = $this->database->table('users')->where('username', $username)->fetch();
+		$row = $this->database->table('uzivatel')->where('ID', $username)->fetch();
 		if (!$row) 
 		{
 			throw new Nette\Security\AuthenticationException('User not found.');
 		}
 
-		if ( !$this->passwords->verify($password, $row->password)) 
+		if ( !$this->passwords->verify($password, $row->heslo)) 
 		{
 			throw new Nette\Security\AuthenticationException('Invalid password.');
 		}
 
-		return new SimpleIdentity( $row->username,$row->role);
+		return new SimpleIdentity( $row->ID,$row->role);
 	}
 	public function add(string $username, string $password,string $role='registered'): void
 	{
 		try 
 		{
-			$this->database->table('users')->insert(['username' => $username,'password' => $this->passwords->hash($password),'role' => $role]);
+			$this->database->table('uzivatel')->insert(['ID' => $username,'heslo' => $this->passwords->hash($password),'role' => $role]);
 		} 
 		catch (Nette\Database\UniqueConstraintViolationException $e) {
 			throw new DuplicateNameException;

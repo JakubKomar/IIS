@@ -32,7 +32,6 @@ final class SignUpPresenter extends \App\CoreModule\Presenters\BasePresenter
 			->setRequired('Zadejte prosím heslo ještě jednou pro kontrolu')
 			->addRule($form::EQUAL, 'Hesla se neshodují', $form['password'])
 			->setOmitted();
-		$form->addEmail('email', 'E-mail');
 		$form->addSubmit('send', 'Registrovat');
 
 

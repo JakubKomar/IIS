@@ -16,6 +16,6 @@ final class  EditUser
 
 	public function getProfileData(string $username)
 	{
-		return $this->database->fetch('SELECT * FROM users WHERE username = ?', $username);
+		return $this->database->fetch('SELECT * FROM uzivatel WHERE ID = ?', $username);
 	}
 }

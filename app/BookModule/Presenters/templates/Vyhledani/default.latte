@@ -4,7 +4,6 @@
 	{foreach $knihy as $kniha}
 		<div class="kniha">
 			<h2><a href="{link Kniha:show $kniha->ID}">{$kniha->nazev}</a></h2>
-			<div class="date">{$kniha->datumVydani|date:'F j, Y'}</div>
 		</div>
 	{/foreach}
 	{/if}

@@ -19,7 +19,7 @@ final class KnihaPresenter extends \App\CoreModule\Presenters\BasePresenter
 
 	public function renderShow(int $id): void
 	{
-		$kniha = $this->database->table('kniha')->get($id);
+		$kniha = $this->database->table('titul')->get($id);
 		
 		if (!$kniha) {
 			$this->error('Kniha s není dostupná nebo byla smazána.');
