@@ -21,4 +21,6 @@
 <p>Žánry: {$kniha->zanry}</p>
 <p>Tagy: {$kniha->tagy}</p>
 
+<p>{$voteCount} uživatelům hlasovalo pro tuto knihu</p>
+{if $user->isLoggedIn()}<a href="{link Vote! $kniha->ID}">Hlasovat pro tuto knihu</a>{/if}
 {/block}

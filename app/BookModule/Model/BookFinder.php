@@ -72,7 +72,27 @@ final class  BookFinder
 		]);
 
 	}
-	
+
+	public function voteBook(string $bookName,string $username): void
+	{
+		try 
+		{
+			$this->database->table('hlas')->insert([
+				'ID_uzivatel' => $username,
+				'ID_titul' =>$bookName,
+			]);
+		} 
+		catch (Nette\Database\UniqueConstraintViolationException $e) 
+		{
+			throw new DuplicateNameException;
+		}
+	}
+
+	public function getVoteCount(string $bookName):int
+	{
+		return $this->database->table('hlas')->where('ID_titul',$bookName)->count('*');
+	}
+
 	public function deleteAutor(string $bookName,int $discriminant)
 	{
 		$this->database->table('autor')->where('ID_titul', $bookName)->where('diskriminant',$discriminant)->delete();
