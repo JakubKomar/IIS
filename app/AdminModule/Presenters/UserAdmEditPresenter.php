@@ -43,7 +43,7 @@ final class UserAdmEditPresenter extends  \App\CoreModule\Presenters\LogedPresen
 	{
        	$form = $this->admContoler->formBase();
 		$form->addSubmit('send', 'Uložit')->onClick[] = [$this, 'SavePressed'];
-		$form->addSubmit('delete', 'Smazat')->onClick[] = [$this, 'DeletePressed'];
+		$form->addSubmit('delete', 'Smazat uživatele')->onClick[] = [$this, 'DeletePressed'];
 		$form->setDefaults($this->ProfData);
 		$form->addProtection();
 
@@ -52,10 +52,14 @@ final class UserAdmEditPresenter extends  \App\CoreModule\Presenters\LogedPresen
 
 	public function SavePressed(Form $form, \stdClass $values): void
 	{
+		$this->resorceAutorize('AdminPage');
+		
 		$this->eUser->saveProfileData($values->ID,$values);
 	}
 	public function DeletePressed(Form $form, \stdClass $values): void
 	{
+		$this->resorceAutorize('AdminPage');
+
 		$this->admContoler->deleteUser($values->ID);
 		$this->redirect('UsersAdmin:');
 	}

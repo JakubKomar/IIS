@@ -53,7 +53,6 @@ final class SignUpPresenter extends \App\CoreModule\Presenters\BasePresenter
 		} catch (DuplicateNameException $e) 
 		{
 			$form->addError('Uživatel exituje, zvolte prosím jiný login');
-		}
-		
+		}		
 	}
 }

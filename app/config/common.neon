@@ -28,4 +28,6 @@ services:
 
 	- App\AdminModule\Model\UserAdmPage
 
+	- App\LibraryModule\Model\LibraryModel
+
 	- App\LoginModule\Model\AuthorizatorFactory::create

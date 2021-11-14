@@ -40,6 +40,8 @@ final class UserAdmCreatePresenter extends  \App\CoreModule\Presenters\LogedPres
 	}
 	public function CreatePressed(Form $form, \stdClass $values): void
 	{
+		$this->resorceAutorize('AdminPage');
+		
 		try 
 		{
 			$this->MyAuthenticator->add($values->ID,$values->password,$values->role);
@@ -49,6 +51,7 @@ final class UserAdmCreatePresenter extends  \App\CoreModule\Presenters\LogedPres
 			$form->addError('Uživatel exituje, zvolte prosím jiný login');
 		}
 		$this->eUser->saveProfileData($values->ID,$values);
+		$this->redirect('UserAdmEdit:',$values->ID);
 	}
 }
 

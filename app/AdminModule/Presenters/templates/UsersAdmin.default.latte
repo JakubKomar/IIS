@@ -2,13 +2,18 @@
 	<h1>Správa uživatelů</h1>
 	<a href="{link UserAdmCreate: }">Vytvořit nového uživatele</a>
 	{if $users}
-		<ul>
+		<table>
 		{foreach $users as $uzivatel}
-			<div class="userItem">
-				<li><a href="{link UserAdmEdit: $uzivatel->ID}">{$uzivatel->ID}</a></li>
-			</div>
+			<tr>
+				<div class="userItem">
+					<td><a href="{link UserAdmEdit: $uzivatel->ID}">{$uzivatel->ID}</a></td>
+					<td>{$uzivatel->role}</td>
+					<td>{$uzivatel->meno}</td>
+					<td>{$uzivatel->priezvisko}</td>
+				</div>
+			</tr>
 		{/foreach}
-		</ul>
+		</table>
 	{/if}
 
 {/block}

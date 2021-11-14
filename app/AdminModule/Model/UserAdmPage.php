@@ -6,9 +6,6 @@ use App\LoginModule\Model\MyAuthenticator;
 use App\UserModule\Model\EditUser;
 use Nette\Application\UI\Form;
 
-use Tracy\Debugger;
-Debugger::enable();
-
 final class  UserAdmPage
 {
 	use Nette\SmartObject;

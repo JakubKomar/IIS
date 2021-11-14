@@ -14,8 +14,8 @@ class AuthorizatorFactory
         $acl->addRole('distributor', 'guest'); 
 		$acl->addRole('admin', ['knihovnik','distributor',]); 
 
-		$acl->addResource('Vyhledani');
-		$acl->allow('registered', 'Vyhledani');
+		$acl->addResource('Knihovna');
+		$acl->allow('knihovnik', 'Knihovna');
 
 		$acl->addResource('AdminPage');
 		$acl->allow('admin', 'AdminPage');
