@@ -16,6 +16,10 @@ final class LibraryAddPresenter extends  \App\CoreModule\Presenters\LogedPresent
 	{
 		parent::startup();
 		$this->resorceAutorize('Knihovna');
+		if(!$this->getUser()->isInRole('admin'))
+		{
+			$this->error('Sem nemáte přístup.',403);
+		}
 	}
 
 	private LibraryModel $LibraryModel;
@@ -44,7 +48,7 @@ final class LibraryAddPresenter extends  \App\CoreModule\Presenters\LogedPresent
 	public function AddPressed(Form $form, \stdClass $values): void
 	{
 		if(!$this->getUser()->isInRole('admin'))
-			$this->error('Sem nemáte přístup.');
+			$this->error('Sem nemáte přístup.',403);
 		else
 		{
 			try 

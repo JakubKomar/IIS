@@ -31,7 +31,7 @@ final class LibraryEditPresenter extends  \App\CoreModule\Presenters\LogedPresen
 		$row=$this->LibraryModel->getLibraryAdm($this->getUser()->getIdentity()->getRoles()[0],$this->getUser()->getIdentity()->getId(),$libraryName);
 		if(!$row)
 		{
-			$this->error('Sem nemáte přístup.');
+			$this->error('Sem nemáte přístup.',403);
 		}
 		else
 		{
@@ -55,7 +55,7 @@ final class LibraryEditPresenter extends  \App\CoreModule\Presenters\LogedPresen
 	public function SavePressed(Form $form, \stdClass $values): void
 	{
 		if(!$this->LibraryModel->autetizateAcess($this->getUser()->getRoles()[0],$this->getUser()->getIdentity()->getId(),$values->ID))
-			$this->error('Sem nemáte přístup.');
+			$this->error('Sem nemáte přístup.',403);
 		else
 		{
 			$this->LibraryModel->saveLibaryData($values->ID,$values);
@@ -64,7 +64,7 @@ final class LibraryEditPresenter extends  \App\CoreModule\Presenters\LogedPresen
 	public function DeletePressed(Form $form, \stdClass $values): void
 	{
 		if(!$this->getUser()->isInRole('admin'))
-			$this->error('Sem nemáte přístup.');
+			$this->error('Sem nemáte přístup.',403);
 		else
 		{
 			$this->LibraryModel->deleteLibary( $values->ID);

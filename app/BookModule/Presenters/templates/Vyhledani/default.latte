@@ -1,9 +1,10 @@
 {block content}
+	{if $user->isAllowed('Knihovna')}<a href="{link BookAdd: }">Vytvořit nový titul</a>{/if}
 	{control vyhledaniForm}
 	{if $knihy}
 	{foreach $knihy as $kniha}
 		<div class="kniha">
-			<h2><a href="{link Kniha:show $kniha->ID}">{$kniha->nazev}</a></h2>
+			<h2><a href="{link Kniha:show $kniha->ID}">{$kniha->ID}</a></h2>
 		</div>
 	{/foreach}
 	{/if}

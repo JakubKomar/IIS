@@ -17,7 +17,7 @@ final class KnihaPresenter extends \App\CoreModule\Presenters\BasePresenter
 		$this->database = $database;
 	}
 
-	public function renderShow(int $id): void
+	public function renderShow(string $id): void
 	{
 		$kniha = $this->database->table('titul')->get($id);
 		

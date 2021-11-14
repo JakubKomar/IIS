@@ -28,7 +28,7 @@ final class LibraryPresenter extends  \App\CoreModule\Presenters\LogedPresenter
 		$row=$this->LibraryModel->getLibraryAdm($this->getUser()->getIdentity()->getRoles()[0],$this->getUser()->getIdentity()->getId(),$libraryName);
 		if(!$row)
 		{
-			$this->error('Sem nemáte přístup.');
+			$this->error('Sem nemáte přístup.',403);
 		}
 		else
 		{

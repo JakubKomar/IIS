@@ -1,5 +1,6 @@
 <?php
 namespace App\BookModule\Model;
+use App\LoginModule\Model\DuplicateNameException;
 use Nette;
 
 final class  BookFinder
@@ -16,7 +17,7 @@ final class  BookFinder
 	{
 		//return $this->database->table('kniha')->where('nazev',$text);
 		if($method=="nazev")
-			return $this->database->query('SELECT * FROM titul WHERE nazev REGEXP  ?', $text);
+			return $this->database->query('SELECT * FROM titul WHERE ID REGEXP  ?', $text);
 		else if($method=="zanr")
 			return $this->database->query('SELECT * FROM titul WHERE zanry REGEXP  ?', $text);
 		else if($method=="tag")
@@ -24,4 +25,42 @@ final class  BookFinder
 		else
 			return null;
 	}
+	public function listAll()
+	{
+		return $this->database->query('SELECT * FROM titul ');
+	}
+
+	public function addBook(string $name): void
+	{
+		try 
+		{
+			$this->database->table('titul')->insert(['ID' => $name]);
+		} 
+		catch (Nette\Database\UniqueConstraintViolationException $e) 
+		{
+			throw new DuplicateNameException;
+		}
+	}
+
+	public function editBook(string $name,\stdClass $values):void
+	{
+		$this->database->table('titul')->get($name)->update([
+			'popis' => $values->popis,
+			'vydavatelstvo' => $values->vydavatelstvo,
+			'zanry' => $values->zanry,
+			'tagy' => $values->tagy,
+			'datumVydani' => $values->datumVydani,
+		]);
+	}
+
+	public function getBook(string $bookName)
+	{
+		return $this->database->table('titul')->get($bookName);
+	}
+
+	public function deleteBook(string $name)
+	{
+		$this->database->table('titul')->where('ID', $name)->delete();;
+	}
+
 }

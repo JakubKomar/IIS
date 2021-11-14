@@ -26,7 +26,7 @@ final class VyhledaniPresenter extends \App\CoreModule\Presenters\BasePresenter
        }
        else
        {
-            $this->template->knihy=NULL;
+            $this->template->knihy= $this->search->listAll();
        }
 	}
 
@@ -34,8 +34,7 @@ final class VyhledaniPresenter extends \App\CoreModule\Presenters\BasePresenter
     {
         $form = new Form; // means Nette\Application\UI\Form
 
-        $form->addText('vyraz', 'Hledany výraz:')
-            ->setRequired();
+        $form->addText('vyraz', 'Hledany výraz:');
         $typ = [
             'nazev' => 'Název knihy',
             'zanr' => 'Žánr',
