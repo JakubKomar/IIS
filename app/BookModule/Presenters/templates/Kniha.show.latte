@@ -1,14 +1,24 @@
 {block content}
+
 {if $user->isAllowed('Knihovna')}<a href="{link BookEdit: $kniha->ID}">Editovat</a>{/if}
 <h1 n:block="title">{$kniha->ID}</h1>
 
 <div class="popis">{$kniha->popis}</div>
 
+{if $autori}
+    <h2>Autoři:</h2>
+    <ul>
+    {foreach $autori as $autor}
+        <div class="autor">
+            <li>{$autor->meno} {$autor->priezvisko}</li>
+        </div>
+    {/foreach}
+    </ul>
+{/if}
 <h2>Podrobnosti:</h2>
 <p>Vydavatelství: {$kniha->vydavatelstvo}</p>
-<div class="Datum vydání">{$kniha->datumVydani|date:'F j, Y'}</div>
+<p>Datum vydání: {$kniha->datumVydani|date:'Y.m.d'}</p>
 <p>Žánry: {$kniha->zanry}</p>
 <p>Tagy: {$kniha->tagy}</p>
-
 
 {/block}

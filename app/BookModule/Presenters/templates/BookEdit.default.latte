@@ -1,4 +1,15 @@
 {block content}
-    <h1>Editace knihy:{$bookData->ID}</h1>
+    <a href="{link Kniha:show $bookData->ID}">Zpět na náhled</a>
+    <h1>Editace knihy: {$bookData->ID}</h1>
 	{control bookEditForm}
+
+    <h2>Autoři:</h2>
+    {control autorCreateForm}
+    <ul>
+    {foreach $autori as $autor}
+        <div class="autor">
+            <li>{$autor->meno} {$autor->priezvisko} <a href="{link deleteAutor! $autor->ID_titul,$autor->diskriminant}">Vymazat</a></li>
+        </div>
+    {/foreach}
+    </ul>
 {/block content}

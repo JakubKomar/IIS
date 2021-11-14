@@ -58,6 +58,26 @@ final class  BookFinder
 		return $this->database->table('titul')->get($bookName);
 	}
 
+	public function getAutors(string $bookName)
+	{
+		return $this->database->table('autor')->where('ID_titul',$bookName);
+	}
+
+	public function addAutor(string $bookName,\stdClass $values): void
+	{
+		$this->database->table('autor')->insert([
+			'ID_titul' => $bookName,
+			'meno' =>$values->meno,
+			'priezvisko' =>$values->priezvisko,
+		]);
+
+	}
+	
+	public function deleteAutor(string $bookName,int $discriminant)
+	{
+		$this->database->table('autor')->where('ID_titul', $bookName)->where('diskriminant',$discriminant)->delete();
+	}
+
 	public function deleteBook(string $name)
 	{
 		$this->database->table('titul')->where('ID', $name)->delete();;

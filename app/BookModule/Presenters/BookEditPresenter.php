@@ -43,12 +43,38 @@ final class BookEditPresenter extends \App\CoreModule\Presenters\LogedPresenter
 		return $form;
 	}
 
+	protected function createComponentAutorCreateForm(): Form
+	{
+		$form = new Form;
+		$form->addHidden('ID')->setDefaultValue($this->bookData);
+		$form->addText('meno', 'Jméno')->addRule($form::MAX_LENGTH, 'meno je příliš dlouhé', 48);
+		$form->addText('priezvisko', 'Přijmení')->addRule($form::MAX_LENGTH, 'priezvisko jsou příliš dlouhé', 48);
+		$form->addSubmit('submit', 'Přidat autora')->onClick[] = [$this, 'AddAutor'];
+		$form->addProtection();
+
+		return $form;
+	}
+
+	public function AddAutor(Form $form, \stdClass $values): void
+	{
+		$this->resorceAutorize('Knihovna');
+		$this->bookModel->addAutor($values->ID,$values);
+		$this->redirect('this');
+	}
+
+	public function handleDeleteAutor(string $bookName,int $discriminant): void
+	{
+		$this->resorceAutorize('Knihovna');
+		$this->bookModel->deleteAutor($bookName,$discriminant);
+	}
+
 	public function renderDefault(string $bookName): void
 	{
 		$this->bookData=$this->bookModel->getBook($bookName);
 		$this->template->bookData=$this->bookData;
 		if(!$this->bookData)
 			$this->error('Kniha neexistuje',403);
+		$this->template->autori= $this->bookModel->getAutors($bookName);
 	}
 
 	public function EditPressed(Form $form, \stdClass $values): void
