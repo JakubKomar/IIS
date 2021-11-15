@@ -1,0 +1,24 @@
+{block content}
+{if $user->isAllowed('Knihovna')}<a n:href="Orders: $order->ID_knihovna">zpet do knihovny</a>{/if}
+{if $user->isAllowed('OrdersDView')}<a n:href="OrderDView: ">zpet do objednávek</a>{/if}
+<h2>Objednávka: {$order->ID}</h2>
+<p>Stav: {$order->stav}</p>
+
+<p>Datum zalozenia: {$order->datum_zalozenia|date:'Y-m-d H:i:s'}</p>
+<p>Datum podání: {$order->datum_podani|date:'Y-m-d H:i:s'}</p>
+<p>Datum vyřízení: {$order->datum_vyrizeni|date:'Y-m-d H:i:s'}</p>
+
+<table>
+<tr>
+    <th>Titul</th>
+    <th>Množsví</th>
+</tr>
+    {foreach $items as $item}
+        <tr>
+            <td>{$item->ID_titul}</td>
+            <td>{$item->mnozstvi}</td>
+        </tr>
+    {/foreach}
+</table>
+{if $user->isAllowed('OrdersDView')&&$order->stav=="odeslano"}<a n:href="vyridit! $order->ID">Vyřídit objednávku</a>{/if}
+{/block content}

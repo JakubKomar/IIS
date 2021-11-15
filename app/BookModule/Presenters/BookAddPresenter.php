@@ -31,7 +31,7 @@ final class BookAddPresenter extends \App\CoreModule\Presenters\LogedPresenter
 
 	public function AddPressed(Form $form, \stdClass $values): void
 	{
-		$this->resorceAutorize('Knihovna');
+		$this->resorceAutorize('Knihy');
 
 		try 
 		{

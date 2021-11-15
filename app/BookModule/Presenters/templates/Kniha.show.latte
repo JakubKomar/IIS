@@ -1,6 +1,6 @@
 {block content}
 
-{if $user->isAllowed('Knihovna')}<a href="{link BookEdit: $kniha->ID}">Editovat</a>{/if}
+{if $user->isAllowed('Knihy')}<a href="{link BookEdit: $kniha->ID}">Editovat</a>{/if}
 <h1 n:block="title">{$kniha->ID}</h1>
 
 <div class="popis">{$kniha->popis}</div>
@@ -21,6 +21,6 @@
 <p>Žánry: {$kniha->zanry}</p>
 <p>Tagy: {$kniha->tagy}</p>
 
-<p>{$voteCount} uživatelům hlasovalo pro tuto knihu</p>
+<p>{$voteCount} uživatel/ů hlasovalo pro tuto knihu</p>
 {if $user->isLoggedIn()}<a href="{link Vote! $kniha->ID}">Hlasovat pro tuto knihu</a>{/if}
 {/block}

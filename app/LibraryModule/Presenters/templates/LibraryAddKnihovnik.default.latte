@@ -1,0 +1,21 @@
+{block content}
+	<h1>Knihovníci knihovny: {$libName}</h1>
+	<table>
+	<tr>
+		<th>Jméno</th>
+		<th>Přijmení</th>
+		<th>Login</th>
+		<th>Odstranit</th>
+	</tr>
+    {foreach $knihovniks as $knihovnik}
+		<tr>
+			<td>{$knihovnik->meno} </td>
+			<td>{$knihovnik->priezvisko} </td>
+			<td>{$knihovnik->ID}</td>
+			<td><a href="{link deleteKnihovnik! $libName,$knihovnik->ID}">Zbavit zprávy</a></td>
+		</tr>
+    {/foreach}
+	</table>
+	{control addKnihovnikForm }
+
+{/block}

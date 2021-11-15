@@ -30,5 +30,12 @@ abstract class LogedPresenter extends \App\CoreModule\Presenters\BasePresenter
 			$this->error('Sem nemáte přístup!', 403);
 		}
     }
+    protected function operationAutorize(string $resorce,string $operation):void
+    {
+        if (!$this->getUser()->isAllowed($resorce, $operation)) 
+		{
+			$this->error('Sem nemáte přístup!', 403);
+		}
+    }
 }
 

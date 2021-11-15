@@ -57,14 +57,14 @@ final class BookEditPresenter extends \App\CoreModule\Presenters\LogedPresenter
 
 	public function AddAutor(Form $form, \stdClass $values): void
 	{
-		$this->resorceAutorize('Knihovna');
+		$this->resorceAutorize('Knihy');
 		$this->bookModel->addAutor($values->ID,$values);
 		$this->redirect('this');
 	}
 
 	public function handleDeleteAutor(string $bookName,int $discriminant): void
 	{
-		$this->resorceAutorize('Knihovna');
+		$this->resorceAutorize('Knihy');
 		$this->bookModel->deleteAutor($bookName,$discriminant);
 	}
 
@@ -79,7 +79,7 @@ final class BookEditPresenter extends \App\CoreModule\Presenters\LogedPresenter
 
 	public function EditPressed(Form $form, \stdClass $values): void
 	{
-		$this->resorceAutorize('Knihovna');
+		$this->resorceAutorize('Knihy');
 
 		try 
 		{

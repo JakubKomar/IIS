@@ -17,8 +17,24 @@ class AuthorizatorFactory
 		$acl->addResource('Knihovna');
 		$acl->allow('knihovnik', 'Knihovna');
 
+		$acl->addResource('Knihy');
+		$acl->allow('distributor', 'Knihy');
+		$acl->allow('knihovnik', 'Knihy');
+
 		$acl->addResource('AdminPage');
 		$acl->allow('admin', 'AdminPage');
+
+		$acl->addResource('Orders');
+		$acl->allow('knihovnik', 'Orders');
+
+		$acl->addResource('OrdersDView');
+		$acl->allow('distributor', 'OrdersDView');
+
+		$acl->addResource('OrderMix');
+		$acl->allow('distributor', 'OrderMix');
+		$acl->allow('knihovnik', 'OrderMix');
+
+		$acl->allow('knihovnik', 'Orders', 'add');
 		return $acl;
 	}
 }

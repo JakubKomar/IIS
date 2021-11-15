@@ -1,5 +1,10 @@
 {block content}
+	<a href="{link LibraryDashBoard: }">Zpět</a>
 	<h1>Správa knihovny: {$knihovna->ID}</h1>
-	<a href="{link LibraryEdit: $knihovna->ID}">Editace</a>
-
+	<ul>
+		<li><a href="{link LibraryEdit: $knihovna->ID}">Editace knihovny</a></li>
+		{if $user->isAllowed('AdminPage')}<li><a n:href=":Library:LibraryAddKnihovnik: $knihovna->ID">Editace knihovníků</a></li>{/if}
+		<li><a href="{link :Order:Orders: $knihovna->ID}">Objednávky</a></li>
+		
+	</ol>
 {/block}

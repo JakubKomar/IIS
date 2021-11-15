@@ -3,6 +3,12 @@
 	<a href="{link UserAdmCreate: }">Vytvořit nového uživatele</a>
 	{if $users}
 		<table>
+		<tr>
+			<th>ID</th>
+			<th>Role</th>
+			<th>Jméno</th>
+			<th>Přijmení</th>
+		</tr>
 		{foreach $users as $uzivatel}
 			<tr>
 				<div class="userItem">

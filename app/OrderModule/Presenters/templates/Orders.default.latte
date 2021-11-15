@@ -1,0 +1,26 @@
+{block content}
+<a n:href=":Library:LibraryDashBoard: ">zpet</a>
+<h2>Objednávky</h2>
+{if $user->isAllowed('Orders')}<li><a n:href="NewOrder! $libraryName">Vytvořit objednávku</a></li>{/if}
+
+
+
+<table>
+<tr>
+    <th>ID</th>
+    <th>Stav</th>
+    <th>Datum založení</th>
+</tr>
+    {foreach $orders as $order}
+    <tr>
+        <td>{if $order->stav=="vytvořena"}<a n:href="OrderEdit: $order->ID">{$order->ID}</a>
+            {else}<a n:href="Order: $order->ID">{$order->ID}</a>{/if}
+        
+        </td>
+        <td>{$order->stav}</td>
+        <td>{$order->datum_zalozenia}</td>
+    </tr>
+    {/foreach}
+</table>
+
+{/block content}

@@ -30,4 +30,6 @@ services:
 
 	- App\LibraryModule\Model\LibraryModel
 
+	- App\OrderModule\Model\OrderModel
+
 	- App\LoginModule\Model\AuthorizatorFactory::create

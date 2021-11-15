@@ -36,7 +36,7 @@ final class  LibraryModel
 		}
 		else
 		{
-			return $this->database->query('SELECT * from knihovna K, spravuje S WHERE S.ID_uzivatel= ? and  K.ID = S.ID_knihovna',$login);
+			return $this->database->query('SELECT * from knihovna K, spravuje S WHERE S.ID_uzivatel = ? and  K.ID = S.ID_knihovna',$login);
 		}
 	}
 
@@ -45,7 +45,31 @@ final class  LibraryModel
 		if($role=='admin')
 			return $this->database->query('SELECT * from knihovna K WHERE K.ID = ? ',$library)->fetch();
 		else
-			return $this->database->query('SELECT * from knihovna K, spravuje S WHERE S.ID_uzivatel= ? and S.ID_knihovna= ? ',$login,$library)->fetch();
+			return $this->database->query('SELECT * from knihovna K, spravuje S WHERE S.ID_uzivatel= ? and S.ID_knihovna= ? and  K.ID = S.ID_knihovna',$login,$library)->fetch();
+	}
+
+	public function getKnihovnik()
+	{
+		return $this->database->table('uzivatel')->where('role','knihovnik');
+	}
+
+	public function getKnihovniksInLib(string $library)
+	{
+		return $this->database->query('SELECT * from uzivatel K, spravuje S WHERE K.ID = S.ID_uzivatel  and S.ID_knihovna=?',$library);
+	}
+
+	public function addKnihovnik(string $library,string $login)
+	{
+		try 
+		{
+			$this->database->table('spravuje')->insert(['ID_uzivatel' => $login,
+				'ID_knihovna' => $library
+			]);
+		} 
+		catch (Nette\Database\UniqueConstraintViolationException $e) 
+		{
+			throw new DuplicateNameException;
+		}
 	}
 
 	public function autetizateAcess(string $role,string $login,string $library):bool
@@ -82,6 +106,11 @@ final class  LibraryModel
 	public function deleteLibary(string $name)
 	{
 		$this->database->table('knihovna')->where('ID', $name)->delete();;
+	}
+
+	public function deleteKnihovnik(string $libraryName,string $knihovnikId)
+	{
+		$this->database->table('spravuje')->where('ID_uzivatel', $knihovnikId)->where('ID_knihovna' ,$libraryName)->delete();;
 	}
 
 	public function libEditFormCreate(): Form

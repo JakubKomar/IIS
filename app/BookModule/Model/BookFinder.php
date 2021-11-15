@@ -15,7 +15,6 @@ final class  BookFinder
 
 	public function searchBooks(string $text, string $method="nazev")
 	{
-		//return $this->database->table('kniha')->where('nazev',$text);
 		if($method=="nazev")
 			return $this->database->query('SELECT * FROM titul WHERE ID REGEXP  ?', $text);
 		else if($method=="zanr")
@@ -25,6 +24,7 @@ final class  BookFinder
 		else
 			return null;
 	}
+	
 	public function listAll()
 	{
 		return $this->database->query('SELECT * FROM titul ');
@@ -70,7 +70,6 @@ final class  BookFinder
 			'meno' =>$values->meno,
 			'priezvisko' =>$values->priezvisko,
 		]);
-
 	}
 
 	public function voteBook(string $bookName,string $username): void

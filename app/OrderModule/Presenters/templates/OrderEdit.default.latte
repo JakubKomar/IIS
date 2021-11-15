@@ -1,0 +1,22 @@
+{block content}
+<a n:href="Orders: $order->ID_knihovna">zpet</a>
+<h2>Editace objednávky: {$order->ID}</h2>
+
+<table>
+<tr>
+    <th>Titul</th>
+    <th>Množsví</th>
+    <th>Odstranit</th>
+</tr>
+    {foreach $items as $item}
+        <tr>
+            <td>{$item->ID_titul}</td>
+            <td>{$item->mnozstvi}</td>
+            <td><a n:href="DeleteItem! $order->ID,$item->ID_titul">Odstranit</a></td>
+        </tr>
+    {/foreach}
+</table>
+{control itemCreateForm}
+
+{control sendCreateForm}
+{/block content}
