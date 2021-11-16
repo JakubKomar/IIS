@@ -5,6 +5,7 @@
 		<li><a href="{link LibraryEdit: $knihovna->ID}">Editace knihovny</a></li>
 		{if $user->isAllowed('AdminPage')}<li><a n:href=":Library:LibraryAddKnihovnik: $knihovna->ID">Editace knihovníků</a></li>{/if}
 		<li><a href="{link :Order:Orders: $knihovna->ID}">Objednávky</a></li>
+		<li><a href="{link :BookTransaction:LibBooks: $knihovna->ID}">Správa knih</a></li>
 		
 	</ol>
 {/block}

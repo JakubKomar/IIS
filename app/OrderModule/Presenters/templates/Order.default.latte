@@ -4,10 +4,10 @@
 <h2>Objednávka: {$order->ID}</h2>
 <p>Stav: {$order->stav}</p>
 
-<p>Datum zalozenia: {$order->datum_zalozenia|date:'Y-m-d H:i:s'}</p>
+{if $user->isAllowed('Knihovna')}<p>Datum zalozenia: {$order->datum_zalozenia|date:'Y-m-d H:i:s'}</p>{/if}
 <p>Datum podání: {$order->datum_podani|date:'Y-m-d H:i:s'}</p>
 <p>Datum vyřízení: {$order->datum_vyrizeni|date:'Y-m-d H:i:s'}</p>
-
+<p>Distributor: {$order->ID_uzivatel_distr}</p>
 <table>
 <tr>
     <th>Titul</th>

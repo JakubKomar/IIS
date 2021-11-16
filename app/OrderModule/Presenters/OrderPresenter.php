@@ -39,7 +39,7 @@ final class OrderPresenter extends  \App\CoreModule\Presenters\LogedPresenter
 	public function handleVyridit($id)
 	{
 		$this->resorceAutorize('OrdersDView');
-		if(!$this->OrderModel->autetizateAcessToOrder($this->user,$this->user->getIdentity()->getId(),$orderId))
+		if(!$this->OrderModel->autetizateAcessToOrder($this->user,$this->user->getIdentity()->getId(),intval($id)))
 			$this->error("forbiden",403);
 		$this->OrderModel->handleOrder(intval($id));
 	}

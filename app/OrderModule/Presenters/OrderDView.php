@@ -25,6 +25,9 @@ final class OrderDViewPresenter extends  \App\CoreModule\Presenters\LogedPresent
 
 	public function renderDefault(): void
 	{		
-		$this->template->orders=$this->OrderModel->getOrdersForDistr($this->user->getIdentity()->getId());
+		if($this->getUser()->isInRole('admin'))
+			$this->template->orders=$this->OrderModel->getOrdersAll();
+		else
+			$this->template->orders=$this->OrderModel->getOrdersForDistr($this->user->getIdentity()->getId());
 	}
 }

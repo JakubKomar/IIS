@@ -15,7 +15,6 @@ final class LibraryAddPresenter extends  \App\CoreModule\Presenters\LogedPresent
     protected function startup(): void
 	{
 		parent::startup();
-		$this->resorceAutorize('Knihovna');
 		if(!$this->getUser()->isInRole('admin'))
 		{
 			$this->error('Sem nemáte přístup.',403);

@@ -33,8 +33,7 @@ final class OrdersPresenter extends  \App\CoreModule\Presenters\LogedPresenter
 	}
 
 	public function handleNewOrder(string $library): void
-	{
-		
+	{	
 		$this->operationAutorize('Orders','add');
 		$id=$this->OrderModel->addOrder($library);
 		$this->redirect('OrderEdit:',intval($id));

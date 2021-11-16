@@ -20,6 +20,10 @@ final class  OrderModel
 	{
 		return  $this->database->table('objednavka')->where('ID_uzivatel_distr',$uzivatelId);
 	}
+	public function getOrdersAll()
+	{
+		return  $this->database->table('objednavka');
+	}
 	public function addOrder(string $library)
 	{
 		return $this->database->table('objednavka')->insert(['ID_knihovna' => $library,

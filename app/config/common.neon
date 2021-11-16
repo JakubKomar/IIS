@@ -32,4 +32,6 @@ services:
 
 	- App\OrderModule\Model\OrderModel
 
+	- App\BookTransactionModule\Model\BookTransactionModel
+
 	- App\LoginModule\Model\AuthorizatorFactory::create
