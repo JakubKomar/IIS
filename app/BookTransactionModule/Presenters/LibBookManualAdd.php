@@ -27,6 +27,8 @@ final class LibBookManualAddPresenter extends \App\CoreModule\Presenters\LogedPr
 	
 	public function renderDefault(string $libName): void
 	{
+		if($this->BTM->autorize($this->user, $libName))
+			$this->error("forbiden",403);
 		$this->template->libName= $libName;
 	}
 
@@ -48,6 +50,8 @@ final class LibBookManualAddPresenter extends \App\CoreModule\Presenters\LogedPr
 
 	public function AddItem(Form $form, \stdClass $values): void
 	{
+		if($this->BTM->autorize($this->user,$values->ID_knihovna))
+			$this->error("forbiden",403);
 		$this->BTM->addBook($values->ID_knihovna,$values->mnozstvi,$values->ID_titul);
 		$this->redirect('LibBooks:',$values->ID_knihovna);
 	}

@@ -53,8 +53,23 @@ final class  BookTransactionModel
 			$this->database->table('poskytuje')->where('ID_knihovna',$libName)->where('ID_titul',$titul)->update([
 				'mnozstvi' =>  $mnozstvi,
 			]);
+		}		
+	}
+
+	public function autorize($identity,string $libary):bool
+	{
+		if($identity->isInRole('admin'))
+		{
+			return true;
 		}
-			
+		else if($identity->isInRole('knihovnik'))
+		{
+			if(!$this->database->table('spravuje')->where('ID_uzivatel',$identity->getIdentity()->getId())->where('ID_knihovna',$libary)->fetch())
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

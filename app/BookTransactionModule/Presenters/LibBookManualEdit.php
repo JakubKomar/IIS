@@ -28,6 +28,9 @@ final class LibBookManualEditPresenter extends \App\CoreModule\Presenters\LogedP
 	private $row;
 	public function renderDefault(string $libName,string $titul): void
 	{
+		if($this->BTM->autorize($this->user,$libName))
+			$this->error("forbiden",403);
+
 		$this->row=$this->BTM->getRowPoskytuje( $libName, $titul);
 		$this->template->poskytuje=$this->row;
 	}
@@ -52,6 +55,8 @@ final class LibBookManualEditPresenter extends \App\CoreModule\Presenters\LogedP
 
 	public function EditItem(Form $form, \stdClass $values): void
 	{
+		if($this->BTM->autorize($this->user,$values->ID_knihovna))
+			$this->error("forbiden",403);
 		$this->BTM->editBookN($values->ID_knihovna,$values->ID_titul,$values->mnozstvi);
 		$this->redirect('LibBooks:',$values->ID_knihovna);
 	}
