@@ -3,10 +3,19 @@
 	<h1>Vyhledávání knih</h1>
 	{control vyhledaniForm}
 	{if $knihy}
+	<table>
+	<tr>
+		<th>Titul</th>
+		<th>Žánr/y</th>
+		<th>Tagy/y</th>
+	</tr>
 	{foreach $knihy as $kniha}
-		<div class="kniha">
-			<h2><a href="{link Kniha:show $kniha->ID}">{$kniha->ID}</a></h2>
-		</div>
+		<tr>
+			<td><a href="{link Kniha:show $kniha->ID}">{$kniha->ID}</a></td>
+			<td>{$kniha->zanry}</td>
+			<td>{$kniha->tagy}</td>
+		</tr>
 	{/foreach}
+	</table>
 	{/if}
 {/block content}

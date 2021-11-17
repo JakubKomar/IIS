@@ -16,11 +16,11 @@ final class  BookFinder
 	public function searchBooks(string $text, string $method="nazev")
 	{
 		if($method=="nazev")
-			return $this->database->query('SELECT * FROM titul WHERE ID REGEXP  ?', $text);
+			return $this->database->query('SELECT * FROM titul  WHERE ID REGEXP  ?', $text);
 		else if($method=="zanr")
-			return $this->database->query('SELECT * FROM titul WHERE zanry REGEXP  ?', $text);
+			return $this->database->query('SELECT * FROM titul  WHERE zanry REGEXP  ?', $text);
 		else if($method=="tag")
-			return $this->database->query('SELECT * FROM titul WHERE tagy REGEXP  ?', $text);
+			return $this->database->query('SELECT * FROM titul  WHERE tagy REGEXP  ?', $text);
 		else
 			return null;
 	}

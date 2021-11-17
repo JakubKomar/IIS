@@ -27,7 +27,6 @@
 			<td>{if $vypujcka->datum_vydano }{$vypujcka->datum_vydano->modifyClone('+'.(($vypujcka->prodlouzeni+1)*14).' day')}{/if}</td>
 			<td>{if $vypujcka->datum_vydano }{$vypujcka->datum_vydano->modifyClone('+'.(($vypujcka->prodlouzeni+1)*14).' day')}{/if} </td>
 			<td><a n:href="Borrow: $vypujcka->ID">Detaily</a></td>
-
 		</tr>
 	{/foreach}
 	</table>
