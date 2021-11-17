@@ -8,14 +8,16 @@
 			<th>Role</th>
 			<th>Jméno</th>
 			<th>Přijmení</th>
+			<th>Editovat</th>
 		</tr>
 		{foreach $users as $uzivatel}
 			<tr>
 				<div class="userItem">
-					<td><a href="{link UserAdmEdit: $uzivatel->ID}">{$uzivatel->ID}</a></td>
+					<td>{$uzivatel->ID}</td>
 					<td>{$uzivatel->role}</td>
 					<td>{$uzivatel->meno}</td>
 					<td>{$uzivatel->priezvisko}</td>
+					<td><a href="{link UserAdmEdit: $uzivatel->ID}">Editovat</a></td>
 				</div>
 			</tr>
 		{/foreach}

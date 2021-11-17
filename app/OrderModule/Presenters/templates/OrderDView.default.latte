@@ -4,13 +4,15 @@
 <tr>
     <th>ID</th>
     <th>Stav</th>
-    <th>Datum založení</th>
+    <th>Datum přijmutí</th>
+    <th>Podrobnosti</th>
 </tr>
     {foreach $orders as $order}
     <tr>
-        <td><a n:href="Order: $order->ID">{$order->ID}</a></td>
+        <td>{$order->ID}</td>
         <td>{$order->stav}</td>
         <td>{$order->datum_podani}</td>
+         <td><a n:href="Order: $order->ID">Podrobnosti</a></td>
     </tr>
     {/foreach}
 </table>

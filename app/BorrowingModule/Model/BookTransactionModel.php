@@ -15,11 +15,12 @@ final class  BorrowingModel
 
 	public function getBorrows(string $userName)
 	{
-		return $this->database->table('vypujcka')->where('ID_uzivatel',$userName);
+		return $this->database->table('vypujcka')->where('ID_uzivatel',$userName)->order('ID DESC');
 	}
 	public function getBorrowsFromLib(string $libId)
 	{
-		return $this->database->table('vypujcka')->where('ID_knihovna',$libId);
+		//return $this->database->table('vypujcka')->where('ID_knihovna',$libId)->related('uzivatel')->order('ID DESC');
+		return $this->database->query('SELECT V.*, U.meno,U.ID as username, U.priezvisko  FROM vypujcka V JOIN uzivatel U ON V.ID_uzivatel=U.ID  WHERE V.ID_knihovna=? ORDER BY V.ID DESC',$libId );
 	}
 
 	public function getBorrow(int $ID)
@@ -84,6 +85,7 @@ final class  BorrowingModel
 			]);
 			$this->database->table('poskytuje')->where('ID_titul',$ID_titul)->where('ID_knihovna',$ID_knihovna)->update(['vydano-='=>1]);
 			$this->queueUpdate($ID_titul,$ID_knihovna);
+			$this->vratitEmptyCheck($ID_titul,$ID_knihovna);
 		}
 	}
 
@@ -100,6 +102,15 @@ final class  BorrowingModel
 			$this->database->table('poskytuje')->where('ID_titul',$ID_titul)->where('ID_knihovna',$ID_knihovna)->update(['vydano-='=>1,
 				'mnozstvi-='=>1
 			]);
+			$this->vratitEmptyCheck($ID_titul,$ID_knihovna);
+		}
+	}
+	public function vratitEmptyCheck(string $ID_titul, string $ID_knihovna)
+	{
+		$row=$this->database->table('poskytuje')->where('ID_titul',$ID_titul)->where('ID_knihovna',$ID_knihovna)->fetch();
+		if($row->mnozstvi<1&&$row->vydano<1)
+		{
+			$this->database->table('poskytuje')->where('ID_titul',$ID_titul)->where('ID_knihovna',$ID_knihovna)->delete();
 		}
 	}
 	public function queueUpdate(string $ID_titulu,string $ID_knihovna)

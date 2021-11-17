@@ -1,24 +1,31 @@
 {block content}
+	<a n:href=":Library:Library: $libName">Zpět</a>
 	<h1>Výpůjčky knihovny: {$libName}</h1>
 
 	<table>
 	<tr>
 		<th>ID</th>
+		<th>Username</th>
+		<th>Jméno</th>
+		<th>Přijmení</th>
 		<th>Titul</th>
 		<th>Stav</th>
 		<th>Knihovna</th>
-		<th>Datum vydani</th>
-		<th>nutno vrátit do</th>
-		<th>detaily</th>
+		<th>Datum vydaní</th>
+		<th>Nutno vrátit do</th>
+		<th>Detaily</th>
 	</tr>
     {foreach $vypujcky as $vypujcka}
 		<tr>
 			<td>{$vypujcka->ID} </td>
+			<td>{$vypujcka->username} </td>
+			<td>{$vypujcka->meno} </td>
+			<td>{$vypujcka->priezvisko} </td>
 			<td>{$vypujcka->ID_titul} </td>
 			<td>{$vypujcka->stav} </td>
 			<td>{$vypujcka->ID_knihovna} </td>
-			<td>{$vypujcka->datum_vydano} </td>
-			<td>nutno vráti do </td>
+			<td>{if $vypujcka->datum_vydano }{$vypujcka->datum_vydano->modifyClone('+'.(($vypujcka->prodlouzeni+1)*14).' day')}{/if}</td>
+			<td>{if $vypujcka->datum_vydano }{$vypujcka->datum_vydano->modifyClone('+'.(($vypujcka->prodlouzeni+1)*14).' day')}{/if} </td>
 			<td><a n:href="Borrow: $vypujcka->ID">Detaily</a></td>
 
 		</tr>

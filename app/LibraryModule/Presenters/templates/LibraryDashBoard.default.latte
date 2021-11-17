@@ -1,6 +1,6 @@
 {block content}
-	<h1>Správa knihoven</p>
 	{if $user->isAllowed('AdminPage')}<li><a n:href=":Library:LibraryAdd:">Přidat knihovnu</a></li>{/if}
+	<h1>Správa knihoven</h1>
 	{if $knihovny}
 		<ol>
 		{foreach $knihovny as $knihovna}

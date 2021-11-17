@@ -19,6 +19,6 @@
 {if $user->isAllowed('KnihovnikBorrow')&&$vypujcka->stav=='vydáno'}<a n:href="vratit! $vypujcka->ID">Vrátit</a>{/if}
 {if $user->isAllowed('KnihovnikBorrow')&&$vypujcka->stav=='vydáno'}<a n:href="vratitVyradit! $vypujcka->ID">Vrátit a vyřadit knihu</a>{/if}
 {if $user->isAllowed('KnihovnikBorrow')&&($vypujcka->stav=='rezervováno'||$vypujcka->stav=='ve frontě')}<a n:href="zamitnout! $vypujcka->ID">Zamítnout</a>{/if}
-{if $user->isAllowed('UserBorrow')}<a n:href="smazat! ">Zrušit</a>{/if}	
+{if $user->isAllowed('UserBorrow')&&($vypujcka->stav=='rezervováno'||$vypujcka->stav=='ve frontě')}<a n:href="smazat! ">Zrušit</a>{/if}	
 
 {/block}

@@ -34,7 +34,7 @@ final class VyhledaniPresenter extends \App\CoreModule\Presenters\BasePresenter
     {
         $form = new Form; // means Nette\Application\UI\Form
 
-        $form->addText('vyraz', 'Hledany výraz:');
+        $form->addText('vyraz', 'Hledany výraz:')->setRequired('Zadejte hledaný výraz, prosím.');
         $typ = [
             'nazev' => 'Název knihy',
             'zanr' => 'Žánr',
