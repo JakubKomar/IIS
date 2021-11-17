@@ -19,7 +19,6 @@ final class  BorrowingModel
 	}
 	public function getBorrowsFromLib(string $libId)
 	{
-		//return $this->database->table('vypujcka')->where('ID_knihovna',$libId)->related('uzivatel')->order('ID DESC');
 		return $this->database->query('SELECT V.*, U.meno,U.ID as username, U.priezvisko  FROM vypujcka V JOIN uzivatel U ON V.ID_uzivatel=U.ID  WHERE V.ID_knihovna=? ORDER BY V.ID DESC',$libId );
 	}
 
@@ -35,7 +34,7 @@ final class  BorrowingModel
 		$ID_knihovna=$row->ID_knihovna;
 		if($row->stav=="rezervováno"||$row->stav=="ve frontě")
 		{
-			$this->database->table('vypujcka')->where('ID',$ID)->update(['stav'=>'zamitnuto']);
+			$this->database->table('vypujcka')->where('ID',$ID)->update(['stav'=>'zamítnuto']);
 			if($row->stav=="rezervováno")
 			{
 				$this->database->table('poskytuje')->where('ID_titul',$ID_titul)->where('ID_knihovna',$ID_knihovna)->update(['vydano-='=>1]);

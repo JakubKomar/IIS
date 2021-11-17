@@ -21,7 +21,7 @@
 			<td>{$vypujcka->username} </td>
 			<td>{$vypujcka->meno} </td>
 			<td>{$vypujcka->priezvisko} </td>
-			<td>{$vypujcka->ID_titul} </td>
+			<td><a href="{link :Book:Kniha:show $vypujcka->ID_titul}">{$vypujcka->ID_titul}</a> </td>
 			<td>{$vypujcka->stav} </td>
 			<td>{$vypujcka->ID_knihovna} </td>
 			<td>{if $vypujcka->datum_vydano }{$vypujcka->datum_vydano->modifyClone('+'.(($vypujcka->prodlouzeni+1)*14).' day')}{/if}</td>

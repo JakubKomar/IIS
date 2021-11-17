@@ -15,7 +15,7 @@
 </tr>
     {foreach $items as $item}
         <tr>
-            <td>{$item->ID_titul}</td>
+            <td><a href="{link :Book:Kniha:show $item->ID_titul}">{$item->ID_titul}</a></td>
             <td>{$item->mnozstvi}</td>
         </tr>
     {/foreach}

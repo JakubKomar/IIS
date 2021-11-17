@@ -1,5 +1,5 @@
 {block content}
-<a n:href="Orders: $order->ID_knihovna">zpet</a>
+<a n:href="Orders: $order->ID_knihovna">Zpět</a>
 <h2>Editace objednávky: {$order->ID}</h2>
 
 <table>
@@ -10,7 +10,7 @@
 </tr>
     {foreach $items as $item}
         <tr>
-            <td>{$item->ID_titul}</td>
+            <td><a href="{link :Book:Kniha:show $item->ID_titul}">{$item->ID_titul}</a></td>
             <td>{$item->mnozstvi}</td>
             <td><a n:href="DeleteItem! $order->ID,$item->ID_titul">Odstranit</a></td>
         </tr>

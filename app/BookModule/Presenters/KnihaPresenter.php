@@ -33,7 +33,10 @@ final class KnihaPresenter extends \App\CoreModule\Presenters\BasePresenter
 		$this->template->voteCount=$this->bookModel->getVoteCount($id);
 
 		$this->template->borrows=$this->bookModel->getBorrows($id);
-		$this->template->userID=$this->getUser()->getIdentity()->getId();
+		if($this->getUser()->getIdentity())
+			$this->template->userID=$this->getUser()->getIdentity()->getId();
+		else
+			$this->template->userID=null;
 	}
 
 	public function handleVote(string $bookName): void
@@ -58,6 +61,12 @@ final class KnihaPresenter extends \App\CoreModule\Presenters\BasePresenter
 		$this->bookModel->zarezervovat($libaryName,$bookName,$username);
 		$this->BorrowingModel->queueUpdate( $bookName,$libaryName);
 		$this->redirect(':Borrowing:UserBorrows:');
+	}
+
+	public function handleRedirectToLogin(): void
+	{
+		$this->flashMessage('Pro rezervaci knihy je potřeba se přihlásit.');
+		$this->redirect(':Login:SignIn:');
 	}
 
 }

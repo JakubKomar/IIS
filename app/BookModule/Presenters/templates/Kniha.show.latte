@@ -33,9 +33,9 @@
     </tr>
     {foreach $borrows as $borrow}
         <tr>
-            <td>{$borrow->ID_knihovna}</td>
+            <td><a href="{link :Library:ViewLibrary: $borrow->ID_knihovna}">{$borrow->ID_knihovna}</a></td>
             <td>{$borrow->mnozstvi-$borrow->vydano}</td>
-            <td><a href="{link zapujcit! $kniha->ID, $borrow->ID_knihovna,$userID}">Zarezervovat</a></td>
+            <td>{if $userID}<a href="{link zapujcit! $kniha->ID, $borrow->ID_knihovna,$userID}">Zarezervovat</a>{else}<a href="{link redirectToLogin!}">Zarezervovat</a>{/if}</td>
         </tr>
     {/foreach}
 </table>

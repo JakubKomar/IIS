@@ -69,11 +69,11 @@ final class  LibraryModel
 		}
 	}
 
-	public function autetizateAcess(string $role,string $login,string $library):bool
+	public function autetizateAcess($identity,string $library):bool
 	{
-		if($role=='admin')
+		if($identity->isInRole('admin'))
 			return true;
-		if($this->database->query('SELECT * from knihovna K, spravuje S WHERE S.ID_uzivatel= ? and S.ID_knihovna= ? ',$login,$library)->getRowCount())
+		if($this->database->query('SELECT * from knihovna K, spravuje S WHERE S.ID_uzivatel= ? and S.ID_knihovna= ? ',$identity->getIdentity()->getId(),$library)->getRowCount())
 			return true;
 		else
 			return false;
