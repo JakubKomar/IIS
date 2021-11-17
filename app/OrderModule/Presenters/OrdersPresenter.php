@@ -7,8 +7,7 @@ use App\OrderModule\Model\OrderModel;
 
 use Nette;
 use Nette\Application\UI\Form;
-use Tracy\Debugger;
-Debugger::enable();
+
 final class OrdersPresenter extends  \App\CoreModule\Presenters\LogedPresenter
 {
 	protected function startup(): void
@@ -26,8 +25,9 @@ final class OrdersPresenter extends  \App\CoreModule\Presenters\LogedPresenter
 
 	public function renderDefault(string $libraryName=null): void
 	{
-		if(!$this->OrderModel->autetizateAcessToLib($this->user,$this->user->getIdentity()->getId(),$libraryName))
+		if(!$this->OrderModel->autetizateAcessToLib($this->user,$libraryName))
 			$this->error("forbiden",403);
+			
 		$this->template->orders= $this->OrderModel->getOrders($libraryName);
 		$this->template->libraryName=$libraryName;
 	}
@@ -35,6 +35,9 @@ final class OrdersPresenter extends  \App\CoreModule\Presenters\LogedPresenter
 	public function handleNewOrder(string $library): void
 	{	
 		$this->operationAutorize('Orders','add');
+		if(!$this->OrderModel->autetizateAcessToLib($this->user, $library))
+			$this->error("forbiden",403);
+
 		$id=$this->OrderModel->addOrder($library);
 		$this->redirect('OrderEdit:',intval($id));
 	}

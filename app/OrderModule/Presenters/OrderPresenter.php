@@ -26,12 +26,14 @@ final class OrderPresenter extends  \App\CoreModule\Presenters\LogedPresenter
 	private $orderData;
 	public function renderDefault(int $orderId): void
 	{	
-		if(!$this->OrderModel->autetizateAcessToOrder($this->user,$this->user->getIdentity()->getId(),$orderId))
+		if(!$this->OrderModel->autetizateAcessToOrder($this->user,$orderId))
 			$this->error("forbiden",403);
 
 		$this->orderData=$this->OrderModel->getOrder($orderId);
+
 		if(!$this->orderData)
 			$this->error("objednávka nexistuje",403);
+
 		$this->template->order= $this->orderData;	
         $this->template->items= $this->OrderModel->getItems($orderId);
 	}
@@ -39,8 +41,10 @@ final class OrderPresenter extends  \App\CoreModule\Presenters\LogedPresenter
 	public function handleVyridit($id)
 	{
 		$this->resorceAutorize('OrdersDView');
-		if(!$this->OrderModel->autetizateAcessToOrder($this->user,$this->user->getIdentity()->getId(),intval($id)))
+	
+		if(!$this->OrderModel->autetizateAcessToOrder($this->user,intval($id)))
 			$this->error("forbiden",403);
+			
 		$this->OrderModel->handleOrder(intval($id));
 	}
 

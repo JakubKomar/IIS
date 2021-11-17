@@ -60,6 +60,7 @@ final class LibBookManualEditPresenter extends \App\CoreModule\Presenters\LogedP
 	{
 		if(!$this->BTM->autorize($this->user,$values->ID_knihovna))
 			$this->error("forbiden",403);
+			
 		$this->BTM->editBookN($values->ID_knihovna,$values->ID_titul,$values->mnozstvi);
 		$this->BorrowingModel->queueUpdate( $values->ID_titul,$values->ID_knihovna);
 		$this->redirect('LibBooks:',$values->ID_knihovna);

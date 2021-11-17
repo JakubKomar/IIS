@@ -32,6 +32,7 @@ final class LibBookManualAddPresenter extends \App\CoreModule\Presenters\LogedPr
 	{
 		if(!$this->BTM->autorize($this->user, $libName))
 			$this->error("forbiden",403);
+
 		$this->template->libName= $libName;
 	}
 
@@ -41,6 +42,7 @@ final class LibBookManualAddPresenter extends \App\CoreModule\Presenters\LogedPr
 		$item=$form->addHidden('ID_knihovna');
 		if(isset($this->template->libName))
 			$item->setDefaultValue($this->template->libName);
+
 		$typ = $this->BTM->getTituls()->fetchPairs('ID','ID');   
         $form->addSelect('ID_titul', 'Titul:', $typ);
 		$form->addInteger('mnozstvi', 'Množství:')->setDefaultValue(1)->addRule($form::MIN, 'Minimální množství je 1', 1);
@@ -55,6 +57,7 @@ final class LibBookManualAddPresenter extends \App\CoreModule\Presenters\LogedPr
 	{
 		if(!$this->BTM->autorize($this->user,$values->ID_knihovna))
 			$this->error("forbiden",403);
+			
 		$this->BTM->addBook($values->ID_knihovna,$values->mnozstvi,$values->ID_titul);
 		$this->BorrowingModel->queueUpdate( $values->ID_titul,$values->ID_knihovna);
 		$this->redirect('LibBooks:',$values->ID_knihovna);

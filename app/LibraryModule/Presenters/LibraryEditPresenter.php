@@ -28,7 +28,7 @@ final class LibraryEditPresenter extends  \App\CoreModule\Presenters\LogedPresen
 
 	public function renderDefault(string $libraryName): void
 	{
-		$row=$this->LibraryModel->getLibraryAdm($this->getUser()->getIdentity()->getRoles()[0],$this->getUser()->getIdentity()->getId(),$libraryName);
+		$row=$this->LibraryModel->getLibraryAdm($this->user,$libraryName);
 		if(!$row)
 		{
 			$this->error('Sem nemáte přístup.',403);
@@ -54,7 +54,7 @@ final class LibraryEditPresenter extends  \App\CoreModule\Presenters\LogedPresen
 
 	public function SavePressed(Form $form, \stdClass $values): void
 	{
-		if(!$this->LibraryModel->autetizateAcess($this->getUser()->getRoles()[0],$this->getUser()->getIdentity()->getId(),$values->ID))
+		if(!$this->LibraryModel->autetizateAcess($this->user,$values->ID))
 			$this->error('Sem nemáte přístup.',403);
 		else
 		{

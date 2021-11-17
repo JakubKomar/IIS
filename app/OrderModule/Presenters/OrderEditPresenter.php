@@ -26,11 +26,14 @@ final class OrderEditPresenter extends  \App\CoreModule\Presenters\LogedPresente
 	private $orderData;
 	public function renderDefault(int $orderId): void
 	{
-		if(!$this->OrderModel->autetizateAcessToOrder($this->user,$this->user->getIdentity()->getId(),$orderId))
+		if(!$this->OrderModel->autetizateAcessToOrder($this->user,$orderId))
 			$this->error("forbiden",403);
+
 		$this->orderData=$this->OrderModel->getOrder($orderId);
+
 		if(!$this->orderData)
 			$this->error("objednávka nexistuje",403);
+
 		$this->template->order= $this->orderData;	
         $this->template->items= $this->OrderModel->getItems($orderId);
 	}
@@ -72,7 +75,11 @@ final class OrderEditPresenter extends  \App\CoreModule\Presenters\LogedPresente
 
 	public function SendOrder(Form $form, \stdClass $values): void
 	{
+
 		$this->operationAutorize('Orders','add');
+		if(!$this->OrderModel->autetizateAcessToOrder($this->user,intval($values->ID)))
+			$this->error("forbiden",403);
+
 		if(!$this->OrderModel->sendAutorization(intval($values->ID)))
 		{
 			$form->addError('Prázdná či již odeslaná objednávka nelze odeslat');
@@ -86,6 +93,9 @@ final class OrderEditPresenter extends  \App\CoreModule\Presenters\LogedPresente
 	public function DeleteOrder(Form $form, \stdClass $values): void
 	{
 		$this->operationAutorize('Orders','add');
+		if(!$this->OrderModel->autetizateAcessToOrder($this->user,intval($values->ID)))
+			$this->error("forbiden",403);
+
 		if(!$this->OrderModel->addAutorization(intval($values->ID)))
 		{
 			$form->addError('Odeslaná objednávka nelze vymazat');
@@ -99,6 +109,9 @@ final class OrderEditPresenter extends  \App\CoreModule\Presenters\LogedPresente
 	public function AddItem(Form $form, \stdClass $values): void
 	{
 		$this->operationAutorize('Orders','add');
+		if(!$this->OrderModel->autetizateAcessToOrder($this->user,intval($values->ID)))
+			$this->error("forbiden",403);
+
 		if(!$this->OrderModel->addAutorization(intval($values->ID)))
 		{
 			$form->addError('Nelze editovat odeslanou objednávku');
@@ -112,6 +125,8 @@ final class OrderEditPresenter extends  \App\CoreModule\Presenters\LogedPresente
 	public function handleDeleteItem(int $orderId,string $idTitul): void
 	{
 		$this->operationAutorize('Orders','add');
+		if(!$this->OrderModel->autetizateAcessToOrder($this->user,$orderId))
+			$this->error("forbiden",403);
 
 		if(!$this->OrderModel->addAutorization($orderId))
 		{

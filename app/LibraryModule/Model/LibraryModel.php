@@ -5,9 +5,6 @@ use Nette;
 use Nette\Application\UI\Form;
 use App\LoginModule\Model\DuplicateNameException;
 
-use Tracy\Debugger;
-Debugger::enable();
-
 final class  LibraryModel
 {
 	use Nette\SmartObject;
@@ -28,24 +25,24 @@ final class  LibraryModel
 		return $this->database->table('knihovna')->get($library);
 	}
 
-	public function getLibrariesAdm(string $role,string $login)
+	public function getLibrariesAdm($identity)
 	{
-		if($role=='admin')
+		if($identity->isInRole('admin'))
 		{
 			return $this->database->table('knihovna');
 		}
 		else
 		{
-			return $this->database->query('SELECT * from knihovna K, spravuje S WHERE S.ID_uzivatel = ? and  K.ID = S.ID_knihovna',$login);
+			return $this->database->query('SELECT * from knihovna K, spravuje S WHERE S.ID_uzivatel = ? and  K.ID = S.ID_knihovna',$identity->getIdentity()->getId());
 		}
 	}
 
-	public function getLibraryAdm(string $role,string $login,string $library)
+	public function getLibraryAdm($identity,string $library)
 	{
-		if($role=='admin')
+		if($identity->isInRole('admin'))
 			return $this->database->query('SELECT * from knihovna K WHERE K.ID = ? ',$library)->fetch();
 		else
-			return $this->database->query('SELECT * from knihovna K, spravuje S WHERE S.ID_uzivatel= ? and S.ID_knihovna= ? and  K.ID = S.ID_knihovna',$login,$library)->fetch();
+			return $this->database->query('SELECT * from knihovna K, spravuje S WHERE S.ID_uzivatel= ? and S.ID_knihovna= ? and  K.ID = S.ID_knihovna',$identity->getIdentity()->getId(),$library)->fetch();
 	}
 
 	public function getKnihovnik()

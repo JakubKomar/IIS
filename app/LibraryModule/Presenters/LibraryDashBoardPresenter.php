@@ -26,7 +26,7 @@ final class LibraryDashBoardPresenter extends  \App\CoreModule\Presenters\LogedP
 
 	public function renderDefault(): void
 	{
-		$this->template->knihovny=$this->LibraryModel->getLibrariesAdm($this->getUser()->getIdentity()->getRoles()[0],$this->getUser()->getIdentity()->getId());
+		$this->template->knihovny=$this->LibraryModel->getLibrariesAdm($this->user,$this->getUser()->getIdentity()->getId());
 	}
 
 }

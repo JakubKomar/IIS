@@ -18,10 +18,6 @@ final class SignUpPresenter extends \App\CoreModule\Presenters\BasePresenter
 		$this->MyAuthenticator = $MyAuthenticator;
 	}
 
-	public function renderDefault( ): void
-	{
-	}
-
 	protected function createComponentSignUpForm(): Form
 	{
 		$form = new Form;
@@ -42,7 +38,6 @@ final class SignUpPresenter extends \App\CoreModule\Presenters\BasePresenter
 
 	public function signUpFormSucceeded(Form $form, \stdClass $values): void
 	{
-
 		try 
 		{
 			$this->MyAuthenticator->add($values->username, $values->password);

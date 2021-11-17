@@ -24,7 +24,7 @@ final class BorrowPresenter extends \App\CoreModule\Presenters\LogedPresenter
 	{
 		if(!$this->BM->accesBorrow($this->user,$id))
 			$this->error('Forbiden',403);
-			
+
 		$var=$this->BM->getBorrow($id);
 		$this->template->vypujcka=$var;
 
@@ -103,9 +103,7 @@ final class BorrowPresenter extends \App\CoreModule\Presenters\LogedPresenter
 		if(!$this->BM->accesBorrow($this->user,$id))
 			$this->error('Forbiden',403);
 
-		$this->BM->prodlouzitBorrow($id);
+		if(!$this->BM->prodlouzitBorrow($id))
+			$this->flashMessage('Nelze prodloužit více jak 2x');
 	}
-	
-
-
 }

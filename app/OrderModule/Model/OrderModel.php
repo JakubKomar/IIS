@@ -96,20 +96,20 @@ final class  OrderModel
 		return false;
 	}
 
-	public function autetizateAcessToOrder( $roles,string $login,int $OrderId):bool
+	public function autetizateAcessToOrder( $identity,int $OrderId):bool
 	{
-		if($roles->isInRole('admin'))
+		if($identity->isInRole('admin'))
 			return true;
-		else if($roles->isInRole('distributor'))
+		else if($identity->isInRole('distributor'))
 		{
-			if($this->database->table('objednavka')->get($OrderId)->ID_uzivatel_distr==$login)
+			if($this->database->table('objednavka')->get($OrderId)->ID_uzivatel_distr==$identity->getIdentity()->getId())
 				return true;
 			else
 				return false;
 		}
-		else if($roles->isInRole('knihovnik'))
+		else if($identity->isInRole('knihovnik'))
 		{
-			if($this->database->query('SELECT * from  objednavka O,spravuje S WHERE O.ID_knihovna =S.ID_knihovna and O.ID= ? and S.ID_uzivatel= ? ',$OrderId,$login)->getRowCount())
+			if($this->database->query('SELECT * from  objednavka O,spravuje S WHERE O.ID_knihovna =S.ID_knihovna and O.ID= ? and S.ID_uzivatel= ? ',$OrderId,$identity->getIdentity()->getId())->getRowCount())
 				return true;
 			else
 				return false;
@@ -117,11 +117,11 @@ final class  OrderModel
 		else
 			return false;
 	}
-	public function autetizateAcessToLib($roles,string $login,string $library):bool
+	public function autetizateAcessToLib($identity,string $library):bool
 	{
-		if($roles->isInRole('admin'))
+		if($identity->isInRole('admin'))
 			return true;
-		if($this->database->query('SELECT * from knihovna K, spravuje S WHERE S.ID_uzivatel= ? and S.ID_knihovna= ? ',$login,$library)->getRowCount())
+		if($this->database->query('SELECT * from knihovna K, spravuje S WHERE S.ID_uzivatel= ? and S.ID_knihovna= ? ',$identity->getIdentity()->getId(),$library)->fetch())
 			return true;
 		else
 			return false;

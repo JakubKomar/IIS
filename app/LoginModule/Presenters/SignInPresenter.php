@@ -9,11 +9,6 @@ use Nette\Application\UI\Form;
 
 final class SignInPresenter extends \App\CoreModule\Presenters\BasePresenter
 {
-
-	public function renderDefault( ): void
-	{
-	}
-
 	protected function createComponentSignInForm(): Form
 	{
 		$form = new Form;
@@ -27,7 +22,6 @@ final class SignInPresenter extends \App\CoreModule\Presenters\BasePresenter
 		$form->onSuccess[] = [$this, 'signInFormSucceeded'];
 		return $form;
 	}
-
 
 	public function signInFormSucceeded(Form $form, \stdClass $values): void
 	{
