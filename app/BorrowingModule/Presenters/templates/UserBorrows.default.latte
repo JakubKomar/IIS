@@ -1,0 +1,26 @@
+{block content}
+	<h1>Moje výpůjčky</h1>
+
+	<table>
+	<tr>
+		<th>Titul</th>
+		<th>Stav</th>
+		<th>Knihovna</th>
+		<th>Datum vydani</th>
+		<th>nutno vrátit do</th>
+		<th>detaily</th>
+	</tr>
+    {foreach $vypujcky as $vypujcka}
+		<tr>
+			<td>{$vypujcka->ID_titul} </td>
+			<td>{$vypujcka->stav} </td>
+			<td>{$vypujcka->ID_knihovna} </td>
+			<td>{$vypujcka->datum_vydano} </td>
+			<td>nutno vráti do </td>
+			<td><a n:href="Borrow: $vypujcka->ID">Detaily</a></td>
+
+		</tr>
+	{/foreach}
+	</table>
+
+{/block}

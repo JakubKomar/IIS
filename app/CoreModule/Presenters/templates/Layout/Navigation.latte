@@ -8,7 +8,8 @@
         {if !$user->isLoggedIn()}<li><a n:href=":Login:SignIn:">Přihlášení</a></li>{/if}
         {if !$user->isLoggedIn()}<li><a n:href=":Login:SignUp:">Registrace</a></li>{/if}
         {if $user->isLoggedIn()}<li><a n:href="logout!">Odhlášení</a></li>{/if}
-        {if $user->isLoggedIn()}<li><a n:href=":User:UserEdit:">Profil</a></li>{/if}
+        {if $user->isLoggedIn()}<li><a n:href=":User:UserEdit: ">Profil</a></li>{/if}
+        {if $user->isAllowed('UserBorrow')}<li><a n:href=":Borrowing:UserBorrows:">Mé výpůjčky</a></li>{/if}
         {if $user->isAllowed('Knihovna')}<li><a n:href=":Library:LibraryDashBoard:">Spravované knihovny</a></li>{/if}
         {if $user->isAllowed('OrdersDView')}<li><a n:href=":Order:OrderDView:">Objednávky ke spracování</a></li>{/if}
         {if $user->isAllowed('AdminPage')}<li><a n:href=":Admin:UsersAdmin:">Správa uživatelů</a></li>{/if}

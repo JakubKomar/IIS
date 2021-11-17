@@ -1,5 +1,5 @@
 {block content}
-<a n:href=":Library:LibraryDashBoard: ">zpet</a>
+<a n:href=":Library:Library:  $libraryName">Zpět</a>
 <h2>Objednávky</h2>
 {if $user->isAllowed('Orders')}<li><a n:href="NewOrder! $libraryName">Vytvořit objednávku</a></li>{/if}
 

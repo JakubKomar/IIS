@@ -10,9 +10,9 @@ class AuthorizatorFactory
 		$acl = new Permission();
 		$acl->addRole('guest');
         $acl->addRole('registered', 'guest'); 
-        $acl->addRole('knihovnik', 'registered'); 
+        $acl->addRole('knihovnik', 'guest'); 
         $acl->addRole('distributor', 'guest'); 
-		$acl->addRole('admin', ['knihovnik','distributor',]); 
+		$acl->addRole('admin', ['knihovnik','distributor','registered']); 
 
 		$acl->addResource('Knihovna');
 		$acl->allow('knihovnik', 'Knihovna');
@@ -35,6 +35,14 @@ class AuthorizatorFactory
 		$acl->allow('knihovnik', 'OrderMix');
 
 		$acl->allow('knihovnik', 'Orders', 'add');
+
+		$acl->addResource('UserBorrow');
+		$acl->allow('registered', 'UserBorrow');
+
+		$acl->addResource('KnihovnikBorrow');
+		$acl->allow('knihovnik', 'KnihovnikBorrow');
+
+
 		return $acl;
 	}
 }
