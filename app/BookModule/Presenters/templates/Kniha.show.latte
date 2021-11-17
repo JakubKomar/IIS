@@ -1,7 +1,7 @@
 {block content}
 
 {if $user->isAllowed('Knihy')}<a href="{link BookEdit: $kniha->ID}">Editovat</a>{/if}
-<h1 n:block="title">{$kniha->ID}</h1>
+<h1>{$kniha->ID}</h1>
 
 <div class="popis">{$kniha->popis}</div>
 
@@ -23,4 +23,20 @@
 
 <p>{$voteCount} uživatel/ů hlasovalo pro tuto knihu</p>
 {if $user->isLoggedIn()}<a href="{link Vote! $kniha->ID}">Hlasovat pro tuto knihu</a>{/if}
+
+<h2>Lze zapůjčit v:</h2>
+<table>
+    <tr>
+        <th>Knihovna</th>
+        <th>Dostupné množství</th>
+        <th>Zarezervovat</th>
+    </tr>
+    {foreach $borrows as $borrow}
+        <tr>
+            <td>{$borrow->ID_knihovna}</td>
+            <td>{$borrow->mnozstvi-$borrow->vydano}</td>
+            <td><a href="{link zapujcit! $kniha->ID, $borrow->ID_knihovna,$userID}">Zarezervovat</a></td>
+        </tr>
+    {/foreach}
+</table>
 {/block}

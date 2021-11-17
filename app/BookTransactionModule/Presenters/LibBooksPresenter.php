@@ -27,7 +27,7 @@ final class LibBooksPresenter extends \App\CoreModule\Presenters\LogedPresenter
 
 	public function renderDefault(string $libName): void
 	{
-		if($this->BTM->autorize($this->user,$libName))
+		if(!$this->BTM->autorize($this->user,$libName))
 			$this->error("forbiden",403);
 		$this->template->libName= $libName;
 		$this->template->books=  $this->BTM->getBooks($libName);

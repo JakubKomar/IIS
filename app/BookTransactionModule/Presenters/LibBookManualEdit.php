@@ -9,6 +9,7 @@ use App\LoginModule\Model\DuplicateNameException;
 use Nette;
 use Nette\Application\UI\Form;
 use App\BookTransactionModule\Model\BookTransactionModel;
+use App\BorrowingModule\Model\BorrowingModel;
 
 final class LibBookManualEditPresenter extends \App\CoreModule\Presenters\LogedPresenter
 {
@@ -18,17 +19,19 @@ final class LibBookManualEditPresenter extends \App\CoreModule\Presenters\LogedP
 		$this->resorceAutorize('Knihovna');
 	}
 
-    private BookTransactionModel $BTM;
+	private BookTransactionModel $BTM;
+	private BorrowingModel $BorrowingModel;
 
-	public function __construct(BookTransactionModel $BTM)
+	public function __construct(BookTransactionModel $BTM,BorrowingModel $BorrowingModel)
 	{
         $this->BTM=$BTM;
+		$this->BorrowingModel=$BorrowingModel;
 	}
 
 	private $row;
 	public function renderDefault(string $libName,string $titul): void
 	{
-		if($this->BTM->autorize($this->user,$libName))
+		if(!$this->BTM->autorize($this->user,$libName))
 			$this->error("forbiden",403);
 
 		$this->row=$this->BTM->getRowPoskytuje( $libName, $titul);
@@ -55,9 +58,10 @@ final class LibBookManualEditPresenter extends \App\CoreModule\Presenters\LogedP
 
 	public function EditItem(Form $form, \stdClass $values): void
 	{
-		if($this->BTM->autorize($this->user,$values->ID_knihovna))
+		if(!$this->BTM->autorize($this->user,$values->ID_knihovna))
 			$this->error("forbiden",403);
 		$this->BTM->editBookN($values->ID_knihovna,$values->ID_titul,$values->mnozstvi);
+		$this->BorrowingModel->queueUpdate( $values->ID_titul,$values->ID_knihovna);
 		$this->redirect('LibBooks:',$values->ID_knihovna);
 	}
 }

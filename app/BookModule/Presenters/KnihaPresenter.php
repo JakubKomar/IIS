@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\BookModule\Presenters;
 use App\BookModule\Model\BookFinder;
+use App\BorrowingModule\Model\BorrowingModel;
 use Nette;
 use App\LoginModule\Model\DuplicateNameException;
 
@@ -11,10 +12,11 @@ final class KnihaPresenter extends \App\CoreModule\Presenters\BasePresenter
 {
     
 	private BookFinder $bookModel;
-
-	public function __construct(BookFinder $bookModel)
+	private BorrowingModel $BorrowingModel;
+	public function __construct(BookFinder $bookModel,BorrowingModel $BorrowingModel)
 	{
         $this->bookModel=$bookModel;
+		$this->BorrowingModel=$BorrowingModel;
 	}
 
 	public function renderShow(string $id): void
@@ -29,6 +31,9 @@ final class KnihaPresenter extends \App\CoreModule\Presenters\BasePresenter
 		if(!$this->template->autori->count('*'))
 			$this->template->autori=null;
 		$this->template->voteCount=$this->bookModel->getVoteCount($id);
+
+		$this->template->borrows=$this->bookModel->getBorrows($id);
+		$this->template->userID=$this->getUser()->getIdentity()->getId();
 	}
 
 	public function handleVote(string $bookName): void
@@ -46,6 +51,13 @@ final class KnihaPresenter extends \App\CoreModule\Presenters\BasePresenter
 				$this->flashMessage('Již jste hlasoval.');
 			}	
 		}
+	}
+
+	public function handleZapujcit(string $bookName,string $libaryName,string $username): void
+	{
+		$this->bookModel->zarezervovat($libaryName,$bookName,$username);
+		$this->BorrowingModel->queueUpdate( $bookName,$libaryName);
+		$this->redirect(':Borrowing:UserBorrows:');
 	}
 
 }

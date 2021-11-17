@@ -129,12 +129,25 @@ final class  OrderModel
 	public function handleOrder(int $id)
 	{
 		$row=$this->database->table('objednavka')->get($id);
+		$lib=$row->ID_knihovna;
 		if($row->stav=="odeslano")
 		{
 			$row->update(['stav'=>'vyřízeno',
 				'datum_vyrizeni'=>date('Y-m-d H:i:s')
 			]);
-			//todo transver to lib
+			$items=$this->database->table('polozka_objednavky')->where('ID_objednavka', $id);
+			foreach($items as $item)
+			{
+				$row2=$this->database->table('poskytuje')->where('ID_knihovna', $lib)->where('ID_titul', $item->ID_titul)->fetch();
+				if($row2)
+					$row2->update(['mnozstvi+='=>$item->mnozstvi]);
+				else
+					$this->database->table('poskytuje')->insert([
+						'ID_knihovna'=> $lib,
+						'ID_titul'=> $item->ID_titul,
+						'mnozstvi'=>$item->mnozstvi
+					]);
+			}
 		}
 	}
 

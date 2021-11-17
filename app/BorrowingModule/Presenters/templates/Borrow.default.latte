@@ -1,6 +1,6 @@
 {block content}
 {if $user->isAllowed('UserBorrow')}<a n:href="UserBorrows: ">Zpět na výpůjčky</a>{/if}
-{if $user->isAllowed('KnihovnikBorrow')}Zpět do správy rezervací{/if}
+{if $user->isAllowed('KnihovnikBorrow')}<a n:href="KnihovnikBorrows: $vypujcka->ID_knihovna">Zpět do správy rezervací</a>{/if}
 	<h1>Výpůjčka id: {$vypujcka->ID}</h1>
 	<p>Titul: {$vypujcka->ID_titul}</p>
 	<p>Stav: {$vypujcka->stav}</p>
@@ -10,14 +10,15 @@
 	<p>Datum vrácení: {$vypujcka->datum_vraceno}</p>
 
 	<p>Počet prodloužení: {$vypujcka->prodlouzeni}</p>
-	<p>nutno vrátit do:</p>
-
-	<p>Počet dní do vrácení</p>
-	<p>Potenciální pokuta</p>
-{if $user->isAllowed('KnihovnikBorrow')&&$vypujcka->stav=='rezervovano'}<a n:href="vydat! $vypujcka->ID">Vydat</a>{/if}
-{if $user->isAllowed('KnihovnikBorrow')&&$vypujcka->stav=='zapujceno'}<a n:href="vratit! $vypujcka->ID">Vrátit</a>{/if}
-{if $user->isAllowed('KnihovnikBorrow')&&$vypujcka->stav=='zapujceno'}<a n:href="vratit! $vypujcka->ID">Vrátit a vyřadit knihu</a>{/if}
-{if $user->isAllowed('KnihovnikBorrow')&&$vypujcka->stav=='rezervovano'}<a n:href="zamitnout! $vypujcka->ID">Zamítnout</a>{/if}
-{if $user->isAllowed('UserBorrow')}<a n:href="UserBorrows: ">Zrušit</a>{/if}	
+	
+{if $vypujcka->datum_vydano }<p>nutno vrátit do:{$vypujcka->datum_vydano->modifyClone('+'.(($vypujcka->prodlouzeni+1)*14).' day')}</p>{/if}
+{if isset($pocetDni) }<p>{if $nevracenoVterminu}Neodevzdáno v termínu, den:{else}Počet dní do vrácení{/if}:{$pocetDni}</p>{/if}
+{if $user->isAllowed('UserBorrow')&&$vypujcka->stav=='vydáno'}{if $vypujcka->prodlouzeni<2}<a n:href="prodlouzit! ">Prodloužit</a>{/if}{/if}
+{if isset($pokuta) }<p>Potenciální pokuta:{$pokuta} </p>{/if}
+{if $user->isAllowed('KnihovnikBorrow')&&$vypujcka->stav=='rezervováno'}<a n:href="vydat! $vypujcka->ID">Vydat</a>{/if}
+{if $user->isAllowed('KnihovnikBorrow')&&$vypujcka->stav=='vydáno'}<a n:href="vratit! $vypujcka->ID">Vrátit</a>{/if}
+{if $user->isAllowed('KnihovnikBorrow')&&$vypujcka->stav=='vydáno'}<a n:href="vratitVyradit! $vypujcka->ID">Vrátit a vyřadit knihu</a>{/if}
+{if $user->isAllowed('KnihovnikBorrow')&&($vypujcka->stav=='rezervováno'||$vypujcka->stav=='ve frontě')}<a n:href="zamitnout! $vypujcka->ID">Zamítnout</a>{/if}
+{if $user->isAllowed('UserBorrow')}<a n:href="smazat! ">Zrušit</a>{/if}	
 
 {/block}

@@ -22,54 +22,63 @@ final class BorrowPresenter extends \App\CoreModule\Presenters\LogedPresenter
 
 	public function renderDefault(int $id): void
 	{
-		$this->template->vypujcka=$this->BM->getBorrow($id);
-		/*if($this->BTM->autorize($this->user,$libName))
-			$this->error("forbiden",403);*/
-			
+		$var=$this->BM->getBorrow($id);
+		$this->template->vypujcka=$var;
+
+		if($var->datum_vydano)
+		{
+			$this->template->vratitDo=$var->datum_vydano->modifyClone('+'.(($var->prodlouzeni+1)*14).' day');
+
+			if($var->datum_vraceno)
+				$now = $var->datum_vraceno;
+			else
+				$now = new DateTime();
+
+			$this->template->pocetDni=$now->diff($this->template->vratitDo)->days;
+			if($now>$this->template->vratitDo)
+			{
+				$this->template->pokuta=$this->template->pocetDni*2;
+				$this->template->nevracenoVterminu=true;
+			}
+			else
+				$this->template->nevracenoVterminu=false;
+		}				
 	}
 
 	public function handleVratit(int $id): void
 	{
-		if(!$this->getUser()->isInRole('knihovnik'))
-		{
-			$this->error('Sem nemáte přístup.',403);
-		}
-		
+		$this->resorceAutorize('KnihovnikBorrow');
+
+		$this->BM->vratitBorrow($id);
 	}
 
 	public function handleSmazat(int $id): void
 	{
-		if(!$this->getUser()->isInRole('registrated'))
-		{
-			$this->error('Sem nemáte přístup.',403);
-		}
-
+		$this->BM->smazatBorrow($id);
+		$this->redirect(':Borrowing:UserBorrows:');
 	}
 	
 	public function handleVydat(int $id): void
 	{
-		if(!$this->getUser()->isInRole('knihovnik'))
-		{
-			$this->error('Sem nemáte přístup.',403);
-		}
-
+		$this->resorceAutorize('KnihovnikBorrow');
+		$this->BM->vydatBorrow($id);
 	}
 
 	public function handleVratitVyradit(int $id): void
 	{
-		if(!$this->getUser()->isInRole('knihovnik'))
-		{
-			$this->error('Sem nemáte přístup.',403);
-		}
-
+		$this->resorceAutorize('KnihovnikBorrow');
+		$this->BM->vratitVyraditBorrow($id);
 	}
 
-	public function handleZaminout(int $id): void
+	public function handleZamitnout(int $id): void
 	{
-		if(!$this->getUser()->isInRole('knihovnik'))
-		{
-			$this->error('Sem nemáte přístup.',403);
-		}
+		$this->resorceAutorize('KnihovnikBorrow');
+		$this->BM->zamitnoutBorrow($id);
+	}
+
+	public function handleProdlouzit(int $id): void
+	{
+		$this->BM->prodlouzitBorrow($id);
 	}
 
 

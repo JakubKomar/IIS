@@ -102,4 +102,17 @@ final class  BookFinder
 		$this->database->table('titul')->where('ID', $name)->delete();;
 	}
 
+	public function getBorrows(string $id)
+	{
+		return $this->database->table('poskytuje')->where('ID_titul',$id);
+	}
+
+	public function zarezervovat(string $libName,string $bookName,string $username)
+	{
+		$this->database->table('vypujcka')->insert(['ID_knihovna'=>$libName,
+			'ID_titul'=>$bookName,
+			'ID_uzivatel'=>$username,
+			'datum_vytvoreno'=>date('Y-m-d H:i:s')
+		]);
+	}	
 }
