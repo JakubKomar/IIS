@@ -64,7 +64,7 @@ final class  BookTransactionModel
 		}
 		else if($identity->isInRole('knihovnik'))
 		{
-			if(!$this->database->table('spravuje')->where('ID_uzivatel',$identity->getIdentity()->getId())->where('ID_knihovna',$libary)->fetch())
+			if($this->database->table('spravuje')->where('ID_uzivatel',$identity->getIdentity()->getId())->where('ID_knihovna',$libary)->fetch())
 			{
 				return true;
 			}

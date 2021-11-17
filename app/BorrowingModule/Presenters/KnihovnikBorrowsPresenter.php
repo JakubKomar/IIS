@@ -23,6 +23,8 @@ final class KnihovnikBorrowsPresenter extends \App\CoreModule\Presenters\LogedPr
 	public function renderDefault(string $libID): void
 	{
 		$this->resorceAutorize('KnihovnikBorrow');
+		if(!$this->BM->autorizeLib($this->user,$libID))
+			$this->error('Forbiden',403);
 		$this->template->vypujcky=$this->BM->getBorrowsFromLib($libID);
 		$this->template->libName=$libID;
 			

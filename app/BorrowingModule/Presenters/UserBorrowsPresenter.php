@@ -23,10 +23,7 @@ final class UserBorrowsPresenter extends \App\CoreModule\Presenters\LogedPresent
 	public function renderDefault(): void
 	{
 		$this->resorceAutorize('UserBorrow');
-		$this->template->vypujcky=$this->BM->getBorrows($this->user->getIdentity()->getId());
-		/*if($this->BTM->autorize($this->user,$libName))
-			$this->error("forbiden",403);*/
-			
+		$this->template->vypujcky=$this->BM->getBorrows($this->user->getIdentity()->getId());			
 	}
 
 }

@@ -140,4 +140,47 @@ final class  BorrowingModel
 		}
 		return false;
 	}
+
+	public function accesBorrow($identity,int $ID):bool
+	{
+		if($identity->isInRole('admin'))
+		{
+			return true;
+		}
+
+		$row=$this->database->table('vypujcka')->where('ID',$ID)->fetch();
+		if(!$row)
+			return false;
+		if($identity->isInRole('knihovnik'))
+		{
+			if($this->database->table('spravuje')->where('ID_uzivatel',$identity->getIdentity()->getId())->where('ID_knihovna',$row->ID_knihovna)->fetch())
+			{
+				return true;
+			}
+		}
+		else if($identity->isInRole('registered'))
+		{
+			if($row->ID_uzivatel==$identity->getIdentity()->getId())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public function autorizeLib($identity,string $libary):bool
+	{
+		if($identity->isInRole('admin'))
+		{
+			return true;
+		}
+		else if($identity->isInRole('knihovnik'))
+		{
+			if($this->database->table('spravuje')->where('ID_uzivatel',$identity->getIdentity()->getId())->where('ID_knihovna',$libary)->fetch())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }
