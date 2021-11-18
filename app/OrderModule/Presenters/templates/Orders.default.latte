@@ -1,8 +1,7 @@
 {block content}
 <a n:href=":Library:Library:  $libraryName">Zpět</a>
 <h2>Objednávky</h2>
-{if $user->isAllowed('Orders')}<li><a n:href="NewOrder! $libraryName">Vytvořit objednávku</a></li>{/if}
-
+{if $user->isAllowed('Orders')}<a n:href="NewOrder! $libraryName">Vytvořit objednávku</a>{/if}
 
 
 <table>

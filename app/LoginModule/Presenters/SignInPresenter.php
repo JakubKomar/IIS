@@ -29,7 +29,7 @@ final class SignInPresenter extends \App\CoreModule\Presenters\BasePresenter
 		{
 			$this->getUser()->login($values->username, $values->password);
 			$this->getUser()->setExpiration('30 minutes');
-			$this->presenter->redirect(':Core:Homepage:');
+			$this->redirect(':Core:Homepage:');
 
 		} catch (Nette\Security\AuthenticationException $e) 
 		{
