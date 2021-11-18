@@ -7,7 +7,6 @@ use App\Model;
 
 class LogedPresenter extends \App\CoreModule\Presenters\BasePresenter
 {
-    
     protected function startup(): void
 	{	
         if (!$this->getUser()->isLoggedIn()) 

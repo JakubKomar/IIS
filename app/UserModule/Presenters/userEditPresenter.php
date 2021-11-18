@@ -48,5 +48,7 @@ final class UserEditPresenter extends  \App\CoreModule\Presenters\LogedPresenter
 	public function editFormSucceeded(Form $form, \stdClass $values): void
 	{
 		$this->eUser->saveProfileData($this->getUser()->getIdentity()->getId(),$values);
+		if($this->mySession->backlink)
+			$this->restoreRequest($this->mySession->backlink);
 	}
 }
