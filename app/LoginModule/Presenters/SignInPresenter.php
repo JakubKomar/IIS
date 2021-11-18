@@ -9,6 +9,12 @@ use Nette\Application\UI\Form;
 
 final class SignInPresenter extends \App\CoreModule\Presenters\BasePresenter
 {
+	public function beforeRender()
+	{
+		$this->mySession->lock = true;
+		parent::beforeRender();
+	}
+
 	protected function createComponentSignInForm(): Form
 	{
 		$form = new Form;
@@ -35,7 +41,7 @@ final class SignInPresenter extends \App\CoreModule\Presenters\BasePresenter
 
 		} catch (Nette\Security\AuthenticationException $e) 
 		{
-			$form->addError('Incorrect username or password.');
+			$form->addError('Nesprávné heslo nebo uživatelské jméno.');
 		}
 	}
 }

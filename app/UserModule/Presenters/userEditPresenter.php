@@ -10,7 +10,12 @@ use Nette\Application\UI\Form;
 
 final class UserEditPresenter extends  \App\CoreModule\Presenters\LogedPresenter
 {
-  
+	public function beforeRender()
+	{
+		$this->mySession->lock = true;
+		parent::beforeRender();
+	}
+	
     private EditUser $eUser;
 	private $ProfData;
 	public function __construct(EditUser $eUser)

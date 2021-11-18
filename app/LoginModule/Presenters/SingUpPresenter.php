@@ -11,6 +11,12 @@ use App\LoginModule\Model\DuplicateNameException;
 
 final class SignUpPresenter extends \App\CoreModule\Presenters\BasePresenter
 {
+	public function beforeRender()
+	{
+		$this->mySession->lock = true;
+		parent::beforeRender();
+	}
+
 	private MyAuthenticator $MyAuthenticator;
 
 	public function __construct(MyAuthenticator $MyAuthenticator)

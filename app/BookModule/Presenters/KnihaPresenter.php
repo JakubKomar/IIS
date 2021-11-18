@@ -13,14 +13,6 @@ final class KnihaPresenter extends \App\CoreModule\Presenters\BasePresenter
     
 	private BookFinder $bookModel;
 	private BorrowingModel $BorrowingModel;
-
-	public function beforeRender()
-	{
-		parent::beforeRender();
-
-		// uložíme request
-		$this->mySession->backlink = $this->storeRequest();
-	}
 	
 	public function __construct(BookFinder $bookModel,BorrowingModel $BorrowingModel)
 	{
