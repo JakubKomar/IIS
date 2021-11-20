@@ -1,6 +1,11 @@
 {block content}
-	<a n:href=":Library:Library: $knihovna->ID">Zpět</a>
+<div id="library-edit">
+	<div id="library-edit-back">
+		<a n:href=":Library:Library: $knihovna->ID">Zpět</a>
+	</div>
 	<h1>Editace knihovny: {$knihovna->ID}</h1>
-	{control libraryEditForm }
-
+	<div id="library-edit-formular">
+		{control libraryEditForm }
+	</div>
+</div>
 {/block}

@@ -2,6 +2,6 @@ parameters:
 
 
 database:
-	dsn: 'mysql:host=sql11.freemysqlhosting.net:3306;dbname=sql11452280'
-	user: sql11452280
-	password: JqLSklab9q
+	dsn: 'mysql:host=127.0.0.1;dbname=iis'
+	user: root
+	password: KOKOSkokos121@

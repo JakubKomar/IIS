@@ -1,10 +1,14 @@
 {block content}
-	<a n:href=":Library:Library:  $libName">Zpět</a>
+<div id="lib-books">
+	<div id="lib-books-back">
+		<a n:href=":Library:Library:  $libName">Zpět</a>
+	</div>
 	<h1>Knihy v knihovně:{$libName}</h1>
 	<a n:href=':Order:Orders: $libName'>Přehled objednávek</a>
+	<br><br>
 	<a n:href="LibBookManualAdd: $libName">Přidat titul manuálně do knihovny</a>
-
-	<table>
+	<div class="medzera"></div>
+	<table id="lib-books-table">
 	<tr>
 		<th>Jméno titulu</th>
 		<th>Celkový počet</th>
@@ -22,4 +26,5 @@
 		</tr>
 	{/foreach}
 	</table>
+</div>
 {/block}

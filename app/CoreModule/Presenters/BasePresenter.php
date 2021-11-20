@@ -25,6 +25,9 @@ class BasePresenter extends Nette\Application\UI\Presenter
             $this->mySession->lock=false;
         else
             $this->mySession->backlink = $this->storeRequest();
+
+        $this->redrawControl('all');
+
 	}
     
     public function formatLayoutTemplateFiles():array
@@ -35,9 +38,9 @@ class BasePresenter extends Nette\Application\UI\Presenter
     public function handleLogout():void
     {
         $this->getUser()->logout(true);
-        $this->flashMessage('Odhlšení proběhlo úspěšně');
+        $this->flashMessage('Odhlášení proběhlo úspěšně');
         if($this->mySession->backlink)
 			$this->restoreRequest($this->mySession->backlink);
-        $this->redirect(':Core:Homepage:');
+        $this->redirect(':Library:ViewLibraries:default');
     }
 }
