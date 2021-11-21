@@ -49,8 +49,14 @@ final class  BookFinder
 			'vydavatelstvo' => $values->vydavatelstvo,
 			'zanry' => $values->zanry,
 			'tagy' => $values->tagy,
-			'datumVydani' => $values->datumVydani,
 		]);
+		try {
+			$this->database->table('titul')->get($name)->update([
+				'datumVydani' => $values->datumVydani,
+			]);
+		} 
+		catch (\Exception $e ) 
+		{}
 	}
 
 	public function getBook(string $bookName)
