@@ -11,19 +11,16 @@
 </head>
 <body>
 
-<!-- Zkontrolujte prosím nastavení kódování v hlavièce dokumentu 
-     podle pou¾itého editoru -->
 
-<h1>Knihovna</h1> <!-- Nahradte názvem svého zadání -->
+<h1>Knihovna</h1> 
 
 <dl>
 	<dt>Autoøi</dt>
-	<dd>Jakub Komárek <a href="mailto:xkomar33@stud.fit.vutbr.cz">xkomar33@stud.fit.vutbr.cz</a> - backend
+	<dd>Jakub Komárek <a href="mailto:xkomar33@stud.fit.vutbr.cz">xkomar33@stud.fit.vutbr.cz</a> - backend, nasazení systému
 	</dd>
-	<dd>Druhé jméno <!-- Nahraïte skuteèným jménem a e-mailem autora a popisem èinnosti --> <a href="mailto:xautor02@stud.fit.vutbr.cz">xautor02@stud.fit.vutbr.cz</a> - implementace databáze, frontend
+	<dd>Druhé jméno  <a href="mailto:xautor02@stud.fit.vutbr.cz">xautor02@stud.fit.vutbr.cz</a> - implementace databáze, frontend
 	</dd>
-  <dd>Tøetí jméno <!-- Nahraïte skuteèným jménem a e-mailem autora a popisem èinnosti -->
-	    <a href="mailto:xautor03@stud.fit.vutbr.cz">xautor03@stud.fit.vutbr.cz</a> - návrh databáze, výpomoc pøi frontendu, testování
+  <dd>Tøetí jméno  <a href="mailto:xautor03@stud.fit.vutbr.cz">xautor03@stud.fit.vutbr.cz</a> - návrh databáze, výpomoc pøi frontendu, testování
 	</dd>
 	<dt>URL aplikace</dt>
 	<dd><a href="http://www.komarnet.cz/www/">http://www.komarnet.cz/www/</a></dd>
@@ -33,32 +30,69 @@
 <p>Uveïte prosím existující zástupce <strong>v¹ech rolí u¾ivatelù</strong>.</p>
 <table>
 <tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
-<tr><td>admin</td><td>admin</td><td>Administrátor</td></tr>
-<tr><td>prodavac</td><td>prodavac</td><td>Prodavaè</td></tr>
-<tr><td>franta</td><td>franta</td><td>Zákazník</td></tr>
+<tr><td>admin</td><td>*mBgD6@9&e2^4</td><td>Administrátor</td></tr>
+<tr><td>knihovnik1</td><td>JkWM%9^AP8#8%</td><td>Knihovník</td></tr>
+<tr><td>distributor</td><td>*VT%9j8sXzAJh</td><td>Distributor</td></tr>
+<tr><td>user1</td><td>Jh#4&4R94B77v</td><td>U¾ivatel</td></tr>
+<!--<tr><td>!ostatní úèty!</td><td>Jh#4&4R94B77v</td><td>*</td></tr>-->
 </tbody></table>
 
-<p>(Diagram pøípadù u¾ití není nutné vkládat, pokud IS implementuje role a pøípady u¾ití definované zadáním.)</p> 
-
 <h2>Implementace</h2>
-<p>Struèná dokumentace k implementaci, která popisuje, které èásti projektu (napø. PHP skripty) implementují jednotlivé pøípady pou¾ití.</p>
 
+<ul>
+	<li>Struktura projektu:
+		<ol>
+			<li>app - umístìní pro presentry,controlery, ¹ablony</li>
+			<li>vendor - knihovny frameworku</li>
+			<li>www - css, js, naja</li>
+			<li>sql - script pro incializaci databáze</li>
+			<li>doc - vìci k dokumentaci</li>
+		</ol> 
+
+	</li>
+	<li><p>Projekt byl implementován nad frameworkem Nette. Pro plynulej¹í chod byla pou¾ita ajaxová komunikace pomocí knihovny Naja. Vycházelo se z implemetaèního vzoru MVC. Jednotlivé èásti informaèního systému jsou rozdìleny do modulù.
+		 Obsah a funkce  modulù je popsána ní¾e.</p>
+		<ol>
+			<li>Admin - správa u¾ivatelù</li>
+			<li>Book - Zobrazení, vyhledání, editace kni¾ních titulù</li>
+			<li>BookTransaction - modul pro pøidávání/odebírání knih nad knihovnou</li>
+			<li>Borrowing - modul pro vypùjèování knih</li>
+			<li>Core - základní tøídy pro v¹echny moduly</li>
+			<li>Library - správa knihovny + pohledy u¾ivatele na knihovny</li>
+			<li>Login - pøihla¹ování, registrace + bezpeènostní logika</li>
+			<li>Order - správa objednávek</li>
+			<li>User - editování u¾ivatelského profilu</li>
+		</ol> 
+	</li>
+
+</ul>
 <h3>Databáze</h3>
 
-Zde vlo¾te grafické schéma relaèní databáze (tabulek v databázi).
+<img src="doc/Database.png" alt="Databáze">
 
 <h2>Instalace</h2>
-
-Struènì popi¹te: 
+ 
 <ul>
-<li>postup instalace na server,</li>
-<li>softwarové po¾adavky (verze PHP apod.),</li>
-<li>jak rozbalit, konfigurovat, inicializovat databázi, ...</li>
+<li>postup instalace na server:</li>
+<ol>
+	<li>Pøekopírovat obsah adresáøe do /var/www/ (umístìní pro apache2 - mù¾e se na va¹í stanici li¹it).</li>
+	<li>V souboru app/config/local.neon zeditovat pøihlá¹ovací údaje k databázy.</li>
+	<li>Správnì nakonfigurovat Apache2. Na hostigu ovykle není poteøeba</li>
+</ol>
+<li>softwarové po¾adavky:</li>
+<ul>
+	<li>PHP > 7.3.X</li>
+	<li>Apache2 > 2.2.X </li>
+	<li>Mysq > 8.X.X </li>
+	<li>Ubuntu > 18.X èi jiný linux</li>
 </ul>
 
-<h2>Známé problémy</h2>
-<p>Zde popi¹te, které body zadání nejsou implementovány a z jakého dùvodu. Napø. &#8222;Z èasových dùvodù nebyla implementována správa u¾ivatelù.&#8221; Pomù¾ete tím zrychlit hodnocení, kdy¾ neimplementované funkce nebudeme muset dlouze hledat.</p>
+<li>konfigurace databáze:</li>
+<ol>
+	<li>Pøihlásit se do databáze - Adminer, Php my admin</li>
+	<li>Provést import ze souboru sql/iisDatabase.sql</li>
+</ol>
 
-
+</ul>
 
 </body></html>
