@@ -40,7 +40,7 @@ final class UserEditPresenter extends  \App\CoreModule\Presenters\LogedPresenter
 		$form->addText('psc', 'PSČ')->addRule($form::MAX_LENGTH, 'psc je příliž dlouhý', 6);
 
 		$form->addPassword('password', 'Změna hesla:')->addRule($form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaků', 8);
-		$form->addPassword('passwordVerify', 'Heslo pro kontrolu:')
+		$form->addPassword('passwordVerify', 'Heslo znovu:')
 			->addRule($form::EQUAL, 'Hesla se neshodují', $form['password']);
 		$form->addSubmit('send', 'Uložit');
 

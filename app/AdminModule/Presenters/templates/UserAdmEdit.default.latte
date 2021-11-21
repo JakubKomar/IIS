@@ -1,5 +1,11 @@
 {block content}
-	<a n:href=":Admin:UsersAdmin: ">Zpět</a>
+<div id="user-admin-edit">
+	<div id="user-admin-edit-back">
+		<a n:href=":Admin:UsersAdmin: ">Zpět</a>
+	</div>
 	<h1>Editace uživatele: {$name}</h1>
-	{control admEditProfileForm }
+	<div id="user-admin-edit-formular">
+		{control admEditProfileForm }
+	</div>
+</div>
 {/block}

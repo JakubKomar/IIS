@@ -37,7 +37,7 @@ final class SignInPresenter extends \App\CoreModule\Presenters\BasePresenter
 			$this->getUser()->setExpiration('30 minutes');
 			if($this->mySession->backlink)
 				$this->restoreRequest($this->mySession->backlink);
-			$this->redirect(':Core:Homepage:');
+			$this->redirect(':Library:ViewLibraries:default');
 
 		} catch (Nette\Security\AuthenticationException $e) 
 		{

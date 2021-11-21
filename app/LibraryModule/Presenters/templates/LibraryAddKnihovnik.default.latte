@@ -1,7 +1,10 @@
 {block content}
-	<a n:href=":Library:Library: $libName">Zpět</a>
+<div id="library-addk">
+	<div id="library-addk-back">
+		<a n:href=":Library:Library: $libName">Zpět</a>
+	</div>
 	<h1>Knihovníci knihovny: {$libName}</h1>
-	<table>
+	<table id="library-addk-table">
 	<tr>
 		<th>Jméno</th>
 		<th>Přijmení</th>
@@ -17,6 +20,11 @@
 		</tr>
     {/foreach}
 	</table>
-	{control addKnihovnikForm }
-
+    <div class="medzera"></div>
+    <div class="medzera"></div>
+    <div class="medzera"></div>
+	<div id="library-addk-formular">
+		{control addKnihovnikForm }
+	</div>
+</div>
 {/block}

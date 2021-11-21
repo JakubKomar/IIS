@@ -1,8 +1,11 @@
 {block content}
-	<a n:href=":Library:Library: $libName">Zpět</a>
+<div id="knihovnik-borrows">
+	<div id="knihovnik-borrows-back">
+		<a n:href=":Library:Library: $libName">Zpět</a>
+	</div>
 	<h1>Výpůjčky knihovny: {$libName}</h1>
 
-	<table>
+	<table id="knihovnik-table">
 	<tr>
 		<th>ID</th>
 		<th>Username</th>
@@ -30,5 +33,5 @@
 		</tr>
 	{/foreach}
 	</table>
-
+</div>
 {/block}

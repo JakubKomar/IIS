@@ -53,7 +53,7 @@ final class  UserAdmPage
 			$form->addPassword('password', 'Heslo:')->addRule($form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaků', 8)->setRequired('Zadejte heslo, prosím.');
 		else
 			$form->addPassword('password', 'Změna hesla:')->addRule($form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaků', 8);
-		$form->addPassword('passwordVerify', 'Heslo pro kontrolu:')
+		$form->addPassword('passwordVerify', 'Heslo znovu:')
 			->addRule($form::EQUAL, 'Hesla se neshodují', $form['password']);
 		return $form;
 	}

@@ -1,10 +1,17 @@
 {block content}
-    <a href="{link Kniha:show $bookData->ID}">Zpět na náhled</a>
+<div id="book-edit">
+    <div id="book-edit-back">
+        <a href="{link Kniha:show $bookData->ID}">Zpět na náhled</a>
+        </div>
     <h1>Editace knihy: {$bookData->ID}</h1>
-	{control bookEditForm}
-
+    <div id="book-edit-formular-1">
+	    {control bookEditForm}
+    </div>
+    <div class="medzera"></div>
     <h2>Autoři:</h2>
-    {control autorCreateForm}
+    <div id="book-edit-formular-2">
+        {control autorCreateForm}
+    </div>
     <ul>
     {foreach $autori as $autor}
         <div class="autor">
@@ -12,4 +19,5 @@
         </div>
     {/foreach}
     </ul>
+</div>
 {/block content}

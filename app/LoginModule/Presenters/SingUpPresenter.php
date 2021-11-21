@@ -30,7 +30,7 @@ final class SignUpPresenter extends \App\CoreModule\Presenters\BasePresenter
 		$form->addProtection();
 		$form->addText('username', 'Login:')->setRequired('Zadejte login, prosím.')->addRule($form::MAX_LENGTH, 'Uživatelské jméno je příliž dlouhé', 48);
 		$form->addPassword('password', 'Heslo:')->setRequired('Zadejte heslo, prosím.')->addRule($form::MIN_LENGTH, 'Heslo musí mít alespoň %d znaků', 8);
-		$form->addPassword('passwordVerify', 'Heslo pro kontrolu:')
+		$form->addPassword('passwordVerify', 'Heslo znovu:')
 			->setRequired('Zadejte prosím heslo ještě jednou pro kontrolu')
 			->addRule($form::EQUAL, 'Hesla se neshodují', $form['password'])
 			->setOmitted();
