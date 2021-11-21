@@ -14,7 +14,7 @@ class Bootstrap
 		$configurator = new Configurator;
 		$appDir = dirname(__DIR__);
 
-		$configurator->setDebugMode(true); // enable for your remote IP
+		$configurator->setDebugMode(false); // enable for your remote IP
 		$configurator->enableTracy($appDir . '/log');
 
 		$configurator->setTimeZone('Europe/Prague');
@@ -24,7 +24,7 @@ class Bootstrap
 
 		$configurator->addConfig($appDir . '/app/config/common.neon');
 		$configurator->addConfig($appDir . '/app/config/local.neon');
-
+		$configurator->setDebugMode(false);
 		return $configurator;
 	}
 }
