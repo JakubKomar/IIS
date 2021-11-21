@@ -2,6 +2,6 @@ parameters:
 
 
 database:
-	dsn: 'mysql:host=127.0.0.1;dbname=iis'
-	user: root
-	password: KOKOSkokos121@
+	dsn: 'mysql:host=a045um.forpsi.com;dbname=f153493'
+	user: f153493
+	password: ffmk&N2nnZPk8

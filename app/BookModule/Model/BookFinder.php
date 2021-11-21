@@ -57,6 +57,7 @@ final class  BookFinder
 		} 
 		catch (\Exception $e ) 
 		{}
+	
 	}
 
 	public function getBook(string $bookName)
